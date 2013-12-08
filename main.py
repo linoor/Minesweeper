@@ -4,8 +4,9 @@ from pygame.locals import *
 pygame.init()
 fps = pygame.time.Clock()
 
-# ustawianie okna
+# ustawianie wielkosci okna
 window = pygame.display.set_mode((640, 480))
+pygame.display.set_caption('Saper')
 
 # glowna petla
 while True:
