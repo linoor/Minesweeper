@@ -16,6 +16,13 @@ def main():
 	background = background.convert()
 	background.fill(whiteColor)
 
+	# ustawianie napisów
+	font = pygame.font.Font(None, 36)
+	text = font.render("Saper!", 1, (10, 10, 10))
+	textpos = text.get_rect()
+	textpos.centerx = background.get_rect().centerx
+	background.blit(text, textpos)
+
 	screen.blit(background, (0,0))
 	pygame.display.flip()
 
