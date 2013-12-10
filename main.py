@@ -4,6 +4,7 @@ from pygame.locals import *
 # kolory 
 whiteColor = pygame.Color(250, 250, 250)
 blueColor = pygame.Color(0, 107, 255)
+orangeColor = pygame.Color(255, 201, 0)
 
 def main():
 	pygame.init()
@@ -15,7 +16,7 @@ def main():
 	# ustawienia tla
 	background = pygame.Surface(screen.get_size())
 	background = background.convert()
-	background.fill(whiteColor)
+	background.fill(orangeColor)
 
 	# ustawianie napisów
 	font = pygame.font.Font(None, 36)
