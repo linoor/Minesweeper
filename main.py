@@ -3,6 +3,7 @@ from pygame.locals import *
 
 # kolory 
 whiteColor = pygame.Color(250, 250, 250)
+blueColor = pygame.Color(0, 107, 255)
 
 def main():
 	pygame.init()
@@ -23,6 +24,16 @@ def main():
 	textpos.centerx = background.get_rect().centerx
 	background.blit(text, textpos)
 
+	#ustawianie planszy
+	size = screen.get_size()
+	game_area = pygame.Surface((size[0]*0.9, size[1]*0.7))
+	game_area = game_area.convert()
+	game_area.fill(blueColor)
+	game_area_pos = game_area.get_rect()
+	game_area_pos.centerx = background.get_rect().centerx
+	game_area_pos.centery = background.get_rect().centery
+	background.blit(game_area, (game_area_pos))
+
 	screen.blit(background, (0,0))
 	pygame.display.flip()
 
@@ -32,6 +43,10 @@ def main():
 			if event.type == QUIT:
 				pygame.quit()
 				sys.exit()
+			if event.type == KEYDOWN:
+				if event.key == K_ESCAPE:
+					pygame.quit()
+					sys.exit()
 
 			screen.blit(background, (0,0))
 			pygame.display.flip()
