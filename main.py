@@ -1,19 +1,19 @@
 import pygame, sys
 from pygame.locals import *
 
-# kolory 
-whiteColor = pygame.Color(250, 250, 250)
-blueColor = pygame.Color(0, 107, 255)
-orangeColor = pygame.Color(255, 201, 0)
+from minefield import *
+from colors import *
 
 def main():
 	pygame.init()
 	pygame.display.set_caption('Saper')
 
 	# ustawianie wielkosci okna
+	global screen
 	screen = pygame.display.set_mode((640, 480))
 
 	# ustawienia tla
+	global background
 	background = pygame.Surface(screen.get_size())
 	background = background.convert()
 	background.fill(orangeColor)
@@ -26,14 +26,8 @@ def main():
 	background.blit(text, textpos)
 
 	#ustawianie planszy
-	size = screen.get_size()
-	game_area = pygame.Surface((size[0]*0.9, size[1]*0.7))
-	game_area = game_area.convert()
-	game_area.fill(blueColor)
-	game_area_pos = game_area.get_rect()
-	game_area_pos.centerx = background.get_rect().centerx
-	game_area_pos.centery = background.get_rect().centery
-	background.blit(game_area, (game_area_pos))
+	minefield = Minefield(screen, background)	
+	minefield.draw()
 
 	screen.blit(background, (0,0))
 	pygame.display.flip()
