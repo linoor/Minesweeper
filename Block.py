@@ -19,8 +19,11 @@ class Block(pygame.sprite.Sprite):
 		self.image = self.image.convert()
 		self.image.fill(colors.coveredColor)
 	def uncover(self):
-		self.image.fill(colors.uncoveredColor)
-		self.covered = False
+		if self.mined:
+			self.image.fill(colors.bombColor)	
+		else:
+			self.image.fill(colors.uncoveredColor)
+			self.covered = False
 	def flag(self):
 		self.image.fill(colors.redColor)
 		self.flagged = True
@@ -32,3 +35,5 @@ class Block(pygame.sprite.Sprite):
 		self.flagged = False
 		self.question = False
 		self.image.fill(colors.coveredColor)
+	def mine(self):
+		self.mined = True

@@ -20,7 +20,7 @@ def main():
 	background.blit(text, textpos)
 
 	#ustawianie planszy
-	normal = Difficulty(20*25+26, 16*25+17, 10, "normal")
+	normal = Difficulty(20*25+26, 16*25+17, 100, "normal")
 	game = Game(Minefield(screen, background, normal))
 	game.new_game()
 

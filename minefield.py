@@ -1,6 +1,7 @@
 import pygame
 import colors
 from Block import *
+import random
 
 class Minefield:
 
@@ -11,6 +12,14 @@ class Minefield:
 		self.difficulty = difficulty
 		self.blocks = pygame.sprite.Group()
 		self.game_area = None
+
+	def set_mines(self):
+		i = 0
+		for b in self.blocks.sprites():
+			if i > self.difficulty.mines_number:
+				break
+			b.mine()
+			i += 1	
 
 	def draw(self):
 		# 540, 350

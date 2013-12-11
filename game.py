@@ -27,5 +27,6 @@ class Game:
 		raise NotImplementedError()
 	def new_game(self):
 		self.minefield.draw()
+		self.minefield.set_mines()
 	def check_win(self):
 		raise NotImplementedError()
