@@ -24,3 +24,11 @@ class Block(pygame.sprite.Sprite):
 	def flag(self):
 		self.image.fill(colors.redColor)
 		self.flagged = True
+	def question(self):
+		self.flagged = False
+		self.question = True
+		self.image.fill(colors.questionColor)
+	def cover(self):
+		self.flagged = False
+		self.question = False
+		self.image.fill(colors.coveredColor)
