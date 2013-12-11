@@ -2,7 +2,7 @@ import pygame
 import colors
 
 class Block(pygame.sprite.Sprite):
-	def __init__(self, size=10, posx, posy):
+	def __init__(self, posx, posy, size=10):
 		pygame.sprite.Sprite.__init__(self)
 		self.size = size
 		self.covered = False
@@ -11,7 +11,8 @@ class Block(pygame.sprite.Sprite):
 		self.question = False
 		self.posx = posx
 		self.posy = posy
-		self.set_init_image()
-	def set_init_image(self):
-		self.image = pygame.Surface(size, size)
+		self.init_image()
+	def init_image(self):
+		self.image = pygame.Surface((self.size, self.size))
+		self.image = self.image.convert()
 		self.image.fill(colors.coveredColor)

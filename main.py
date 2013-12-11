@@ -5,13 +5,15 @@ from minefield import *
 from colors import *
 from game import *
 
+screen_size = 600, 500
+
 def main():
 	pygame.init()
 	pygame.display.set_caption('Saper')
 
 	# ustawianie wielkosci okna
 	global screen
-	screen = pygame.display.set_mode((600, 500))
+	screen = pygame.display.set_mode(screen_size)
 
 	# ustawienia tla
 	global background
@@ -19,7 +21,7 @@ def main():
 	background = background.convert()
 	background.fill(orangeColor)
 
-	# ustawianie napisów
+	# Menu
 	font = pygame.font.Font(None, 36)
 	text = font.render("Saper!", 1, (10, 10, 10))
 	textpos = text.get_rect()
