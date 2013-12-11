@@ -9,7 +9,7 @@ class Minefield:
 		self.background = background
 		self.screen = screen
 		self.difficulty = difficulty
-		self.blocks = None
+		self.blocks = []
 		self.game_area = None
 
 	def draw(self):
@@ -18,15 +18,26 @@ class Minefield:
 
 		self.init_blocks()
 
-		self.game_area.blit(self.block.image, (0,0))
+		for b in self.blocks:
+			self.game_area.blit(b.image, (b.posx, b.posy))
 		self.background.blit(self.game_area, (self.game_area_pos))
 
 	def init_blocks(self):
-		self.block = Block(0,0)
-		self.block.init_image()
+		size = 25
+		padding = 1
+		posx = padding
+		posy = padding
+		while posy < self.difficulty.height:
+			block = Block(posx, posy, size)	
+			block.init_image()
+			posx += size + padding
+			if posx > self.difficulty.width:
+				posx = padding
+				posy += size + padding
+			self.blocks.append(block)
 
 	def init_game_area(self):
-		size = self.difficulty.height, self.difficulty.width
+		size = self.difficulty.width, self.difficulty.height
 		self.game_area = pygame.Surface((size[0]*0.9, size[1]*0.7))
 		self.game_area =self.game_area.convert()
 		self.game_area.fill(blueColor)

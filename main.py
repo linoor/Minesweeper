@@ -30,8 +30,8 @@ def main():
 	background.blit(text, textpos)
 
 	#ustawianie planszy
-	easy = Difficulty(screen.get_size()[0], screen.get_size()[1], 10, "easy")
-	game = Game(Minefield(screen, background, easy))
+	normal = Difficulty(550+29, 448+37*4, 10, "normal")
+	game = Game(Minefield(screen, background, normal))
 	game.new_game()
 
 	screen.blit(background, (0,0))
