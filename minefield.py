@@ -9,16 +9,17 @@ class Minefield:
 		self.background = background
 		self.screen = screen
 		self.difficulty = difficulty
-		self.blocks = []
+		self.blocks = pygame.sprite.Group()
 		self.game_area = None
 
 	def draw(self):
 		# 540, 350
 		self.init_game_area()	
-
 		self.init_blocks()
+		self.update()
 
-		for b in self.blocks:
+	def update(self):
+		for b in self.blocks.sprites():
 			self.game_area.blit(b.image, (b.posx, b.posy))
 		self.background.blit(self.game_area, (self.game_area_pos))
 
@@ -27,18 +28,19 @@ class Minefield:
 		padding = 1
 		posx = padding
 		posy = padding
-		while posy < self.difficulty.height:
+		while posy+size < self.difficulty.height:
 			block = Block(posx, posy, size)	
-			block.init_image()
+			offset = self.game_area_pos.topleft
+			block.rect.topleft = (posx+offset[0], posy+offset[1])
 			posx += size + padding
-			if posx > self.difficulty.width:
+			if posx+size> self.difficulty.width:
 				posx = padding
 				posy += size + padding
-			self.blocks.append(block)
+			self.blocks.add(block)
 
 	def init_game_area(self):
 		size = self.difficulty.width, self.difficulty.height
-		self.game_area = pygame.Surface((size[0]*0.9, size[1]*0.7))
+		self.game_area = pygame.Surface(size)
 		self.game_area =self.game_area.convert()
 		self.game_area.fill(blueColor)
 		self.game_area_pos = self.game_area.get_rect()

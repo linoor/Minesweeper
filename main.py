@@ -5,23 +5,13 @@ from minefield import *
 from colors import *
 from game import *
 from difficulty import *
+from globals import *
 
-screen_size = 600, 500
 
 def main():
 	pygame.init()
 	pygame.display.set_caption('Saper')
-
-	# ustawianie wielkosci okna
-	global screen
-	screen = pygame.display.set_mode(screen_size)
-
-	# ustawienia tla
-	global background
-	background = pygame.Surface(screen.get_size())
-	background = background.convert()
-	background.fill(orangeColor)
-
+	
 	# Menu
 	font = pygame.font.Font(None, 36)
 	text = font.render("Saper!", 1, (10, 10, 10))
@@ -30,7 +20,7 @@ def main():
 	background.blit(text, textpos)
 
 	#ustawianie planszy
-	normal = Difficulty(550+29, 448+37*4, 10, "normal")
+	normal = Difficulty(20*25+26, 16*25+17, 10, "normal")
 	game = Game(Minefield(screen, background, normal))
 	game.new_game()
 
@@ -47,6 +37,9 @@ def main():
 				if event.key == K_ESCAPE:
 					pygame.quit()
 					sys.exit()
+			if event.type == MOUSEBUTTONDOWN: #handler poruszania myszka
+				print(event.pos)
+				game.click(event.pos)
 
 			screen.blit(background, (0,0))
 			pygame.display.flip()
