@@ -3,6 +3,7 @@ from pygame.locals import *
 
 from minefield import *
 from colors import *
+from game import *
 
 def main():
 	pygame.init()
@@ -10,7 +11,7 @@ def main():
 
 	# ustawianie wielkosci okna
 	global screen
-	screen = pygame.display.set_mode((640, 480))
+	screen = pygame.display.set_mode((600, 500))
 
 	# ustawienia tla
 	global background
@@ -26,8 +27,8 @@ def main():
 	background.blit(text, textpos)
 
 	#ustawianie planszy
-	minefield = Minefield(screen, background)	
-	minefield.draw()
+	game = Game(Minefield(screen, background, screen.get_size()[0], screen.get_size()[1]))
+	game.new_game()
 
 	screen.blit(background, (0,0))
 	pygame.display.flip()
