@@ -38,8 +38,12 @@ def main():
 					pygame.quit()
 					sys.exit()
 			if event.type == MOUSEBUTTONDOWN: #handler poruszania myszka
-				print(event.pos)
-				game.click(event.pos)
+				if event.button == 1:
+					print(event.pos)
+					game.left_click(event.pos)
+				if event.button == 3:
+					print(event.pos)
+					game.right_click(event.pos)
 
 			screen.blit(background, (0,0))
 			pygame.display.flip()

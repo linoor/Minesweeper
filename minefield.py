@@ -1,5 +1,5 @@
 import pygame
-from colors import *
+import colors
 from Block import *
 
 class Minefield:
@@ -42,7 +42,7 @@ class Minefield:
 		size = self.difficulty.width, self.difficulty.height
 		self.game_area = pygame.Surface(size)
 		self.game_area =self.game_area.convert()
-		self.game_area.fill(blueColor)
+		self.game_area.fill(colors.game_area_color)
 		self.game_area_pos = self.game_area.get_rect()
 		self.game_area_pos.centerx = self.background.get_rect().centerx
 		self.game_area_pos.centery = self.background.get_rect().centery

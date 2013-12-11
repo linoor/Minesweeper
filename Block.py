@@ -21,3 +21,6 @@ class Block(pygame.sprite.Sprite):
 	def uncover(self):
 		self.image.fill(colors.uncoveredColor)
 		self.covered = False
+	def flag(self):
+		self.image.fill(colors.redColor)
+		self.flagged = True
