@@ -4,6 +4,7 @@ from pygame.locals import *
 from minefield import *
 from colors import *
 from game import *
+from difficulty import *
 
 screen_size = 600, 500
 
@@ -29,7 +30,8 @@ def main():
 	background.blit(text, textpos)
 
 	#ustawianie planszy
-	game = Game(Minefield(screen, background, screen.get_size()[0], screen.get_size()[1]))
+	easy = Difficulty(screen.get_size()[0], screen.get_size()[1], 10, "easy")
+	game = Game(Minefield(screen, background, easy))
 	game.new_game()
 
 	screen.blit(background, (0,0))
