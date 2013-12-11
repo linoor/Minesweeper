@@ -3,7 +3,7 @@ class Game:
 	def __init__(self, minefield):
 		self.minefield = minefield
 	def left_click(self, pos):
-		for b in self.minefield.blocks.sprites():
+		for b in self.minefield.blocks:
 			if b.rect.collidepoint(pos):
 				if b.covered and not b.flagged and not b.question:
 					b.uncover()	
@@ -11,7 +11,7 @@ class Game:
 				print(pos)
 		self.minefield.update()
 	def right_click(self, pos):
-		for b in self.minefield.blocks.sprites():
+		for b in self.minefield.blocks:
 			if b.rect.collidepoint(pos):
 				if b.covered:
 					if not b.flagged and not b.question:
