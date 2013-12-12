@@ -14,7 +14,8 @@ class Minefield:
 		self.game_area = None
 
 	def set_mines(self):
-		indices = [random.randint(0, len(self.blocks)) for i in range(self.difficulty.mines_number)]
+		random.seed()
+		indices = [random.randint(0, len(self.blocks)-1) for i in range(self.difficulty.mines_number)]
 		for i in indices:
 			self.blocks[i].mine()
 

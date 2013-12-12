@@ -7,7 +7,6 @@ from game import *
 from difficulty import *
 from globals import *
 
-
 def main():
 	pygame.init()
 	pygame.display.set_caption('Saper')
