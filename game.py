@@ -36,10 +36,19 @@ class Game:
 			self.end_game()
 		self.minefield.update()
 	def is_game_over(self):
+		# jesli trafimy na mine
 		for b in self.minefield.blocks:
-			if not b.covered and b.mined or self.minefield.mines_left == 0:
+			if not b.covered and b.mined:
 				return True
-		return False
+		# jesli oflagujemy wszystkie miny
+		for b in self.minefield.blocks:
+			if b.mined and not b.flagged:
+				return False
+		# jesli odkryjemy wszystkie niezaminowane pola
+		for b in self.minefield.blocks:
+			if b.covered and not b.mined:
+				return False
+		return True
 	def end_game(self):
 		font = pygame.font.Font(None, 36)
 		if self.check_win():
