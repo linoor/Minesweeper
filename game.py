@@ -1,4 +1,6 @@
 from Block import Block
+import pygame
+import globals
 class Game:
 	def __init__(self, minefield):
 		self.minefield = minefield
@@ -13,7 +15,10 @@ class Game:
 				b.uncover()	
 			print(b.rect)
 			print(pos)
-			self.minefield.update()
+
+		if self.is_game_over():
+			self.end_game()
+		self.minefield.update()
 	def right_click(self, pos):
 		b = self.find_collide_rect(pos)
 		if b:
@@ -26,11 +31,30 @@ class Game:
 					b.cover()
 			print(b.rect)
 			print(pos)
-			self.minefield.update()
+
+		if self.is_game_over():
+			self.end_game()
+		self.minefield.update()
 	def is_game_over(self):
-		raise NotImplementedError()
+		for b in self.minefield.blocks:
+			if not b.covered and b.mined or self.minefield.mines_left == 0:
+				return True
+		return False
+	def end_game(self):
+		font = pygame.font.Font(None, 36)
+		if self.check_win():
+			text = font.render("You win!", 1, (0, 255, 34))
+		else:
+			text = font.render("You lose!", 1, (255, 0, 0))
+		textpos = text.get_rect()
+		textpos.centerx = globals.background.get_rect().centerx
+		textpos.centery = self.minefield.game_area.get_rect().top+40
+		globals.background.blit(text, textpos)
 	def new_game(self):
 		self.minefield.draw()
 		self.minefield.set_mines()
 	def check_win(self):
-		raise NotImplementedError()
+		if self.minefield.mines_left == 0:
+			return True
+		else:
+			return False

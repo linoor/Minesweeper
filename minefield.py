@@ -8,6 +8,7 @@ class Minefield:
 
 	def __init__(self, screen, background, difficulty):
 		self.background = background
+		self.mines_left = difficulty.mines_number
 		self.screen = screen
 		self.difficulty = difficulty
 		self.blocks = []
@@ -52,4 +53,4 @@ class Minefield:
 		self.game_area.fill(colors.game_area_color)
 		self.game_area_pos = self.game_area.get_rect()
 		self.game_area_pos.centerx = self.background.get_rect().centerx
-		self.game_area_pos.centery = self.background.get_rect().centery
+		self.game_area_pos.centery = self.background.get_rect().centery+20

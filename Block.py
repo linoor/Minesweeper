@@ -23,7 +23,7 @@ class Block(pygame.sprite.Sprite):
 			self.image.fill(colors.bombColor)	
 		else:
 			self.image.fill(colors.uncoveredColor)
-			self.covered = False
+		self.covered = False
 	def flag(self):
 		self.image.fill(colors.redColor)
 		self.flagged = True
