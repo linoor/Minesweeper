@@ -55,6 +55,7 @@ class Game:
 			text = font.render("You win!", 1, (0, 255, 34))
 		else:
 			text = font.render("You lose!", 1, (255, 0, 0))
+			self.minefield.uncover_mines()
 		textpos = text.get_rect()
 		textpos.centerx = globals.background.get_rect().centerx
 		textpos.centery = self.minefield.game_area.get_rect().top+40
