@@ -2,17 +2,15 @@ import pygame
 import colors
 from Block import *
 import random
+import globals
 
 #DEBUG MODE
 DEBUG = True
 
 class Minefield:
 
-
-	def __init__(self, screen, background, difficulty):
-		self.background = background
+	def __init__(self, difficulty):
 		self.mines_left = difficulty.mines_number
-		self.screen = screen
 		self.difficulty = difficulty
 		self.blocks = []
 		self.game_area = None
@@ -32,7 +30,7 @@ class Minefield:
 	def update(self):
 		for b in self.blocks:
 			self.game_area.blit(b.image, (b.posx, b.posy))
-		self.background.blit(self.game_area, (self.game_area_pos))
+		globals.background.blit(self.game_area, (self.game_area_pos))
 
 	def init_blocks(self):
 		size = 25
@@ -55,8 +53,8 @@ class Minefield:
 		self.game_area =self.game_area.convert()
 		self.game_area.fill(colors.game_area_color)
 		self.game_area_pos = self.game_area.get_rect()
-		self.game_area_pos.centerx = self.background.get_rect().centerx
-		self.game_area_pos.centery = self.background.get_rect().centery+20
+		self.game_area_pos.centerx = globals.background.get_rect().centerx
+		self.game_area_pos.centery = globals.background.get_rect().centery+20
 
 	def debug(self):
 		for b in self.blocks:

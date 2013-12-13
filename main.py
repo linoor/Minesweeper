@@ -21,7 +21,7 @@ def main():
 	#ustawianie planszy
 	normal = Difficulty(20*25+26, 16*25+17, 100, "normal")
 	easy = Difficulty(20*25+26, 16*25+17, 1, "easy")
-	game = Game(Minefield(screen, background, easy))
+	game = Game(Minefield(easy))
 	game.new_game()
 
 	screen.blit(background, (0,0))
