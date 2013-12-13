@@ -64,7 +64,9 @@ class Game:
 		# przegrana
 		else:
 			text = font.render("You lose!", 1, (255, 0, 0))
-			self.minefield.uncover_mines()
+		# odkrywanie wszystkich min
+		self.minefield.uncover_mines()
+		# umiejscowienie napisu
 		textpos = text.get_rect()
 		textpos.centerx = globals.background.get_rect().centerx
 		textpos.centery = self.minefield.game_area.get_rect().top+40
