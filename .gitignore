@@ -2,3 +2,4 @@ mines.py
 minesweeper.sublime-project
 minesweeper.sublime-workspace
 *.pyc
+.idea/

@@ -3,6 +3,9 @@ import colors
 from Block import *
 import random
 
+#DEBUG MODE
+DEBUG = True
+
 class Minefield:
 
 
@@ -54,6 +57,11 @@ class Minefield:
 		self.game_area_pos = self.game_area.get_rect()
 		self.game_area_pos.centerx = self.background.get_rect().centerx
 		self.game_area_pos.centery = self.background.get_rect().centery+20
+
+	def debug(self):
+		for b in self.blocks:
+			if b.mined:
+				b.image.fill(colors.bombhint)
 
 	def uncover_mines(self):
 		for b in self.blocks:

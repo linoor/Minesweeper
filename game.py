@@ -1,6 +1,10 @@
 from Block import Block
 import pygame
 import globals
+
+#DEBUG MODE
+DEBUG = True
+
 class Game:
 	def __init__(self, minefield):
 		self.minefield = minefield
@@ -22,7 +26,7 @@ class Game:
 				self.end_game()
 			self.minefield.update()
 	def right_click(self, pos):
-		if clickable:
+		if self.clickable:
 			b = self.find_collide_rect(pos)
 			if b:
 				if b.covered:
@@ -40,22 +44,24 @@ class Game:
 			self.minefield.update()
 	def is_game_over(self):
 		# jesli trafimy na mine
-		for b in self.minefield.blocks:
-			if not b.covered and b.mined:
-				return True
+		if any(not b.covered and b.mined for b in self.minefield.blocks):
+			return True
 		# jesli oflagujemy wszystkie miny
-		for b in self.minefield.blocks:
-			if b.mined and not b.flagged:
-				return False
+		# wszystkie pola ktore sa zaminowane musza byc oflagowane
+		if all(b.flagged for b in self.minefield.blocks if b.mined):
+			return True
 		# jesli odkryjemy wszystkie niezaminowane pola
-		for b in self.minefield.blocks:
-			if b.covered and not b.mined:
-				return False
-		return True
+		# TODO TEST
+		if all(not b.covered for b in self.minefield.blocks if not b.mined):
+			return True
+
+		return False
 	def end_game(self):
 		font = pygame.font.Font(None, 36)
+		# wygrana
 		if self.check_win():
 			text = font.render("You win!", 1, (0, 255, 34))
+		# przegrana
 		else:
 			text = font.render("You lose!", 1, (255, 0, 0))
 			self.minefield.uncover_mines()
@@ -68,8 +74,10 @@ class Game:
 	def new_game(self):
 		self.minefield.draw()
 		self.minefield.set_mines()
+		if DEBUG:
+			self.minefield.debug()
 	def check_win(self):
-		if self.minefield.mines_left == 0:
-			return True
-		else:
+		# jesli trafimy na mine
+		if any(b.mined and not b.covered for b in self.minefield.blocks):
 			return False
+		return True
