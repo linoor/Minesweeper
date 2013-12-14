@@ -74,5 +74,5 @@ class Minefield:
 
 	def uncover_mines(self):
 		for b in self.get_blocks():
-			if not (b.flagged or b.question):
+			if b.mined:
 				b.uncover()
