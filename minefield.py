@@ -27,7 +27,6 @@ class Minefield:
 		self.set_mines_surrounding()
 
 	def draw(self):
-		# 540, 350
 		self.init_game_area()	
 		self.init_blocks()
 		self.update()
@@ -54,18 +53,16 @@ class Minefield:
 				tmp_block = []
 
 	def set_mines_surrounding(self):
-		for i in range(len(self.blocks)-1):
-			for j in range(len(self.blocks[i])-1):
+		for i in range(len(self.blocks)):
+			for j in range(len(self.blocks[i])):
 				if self.blocks[i][j].mined:
 					self.set_mines_around(i,j)
 
 	def set_mines_around(self, i, j):
 		for n in range(i-1, i+2):
 			for m in range(j-1, j+2):
-				if n != m:
-					if n >= 0 and m >= 0 and self.blocks[n][m]:
-						print(n, m)
-						self.blocks[n][m].mines_surrounding += 1
+				if n < 16 and m < 20 and self.blocks[n][m]:
+					self.blocks[n][m].mines_surrounding += 1
 
 	def create_block(self, posx, posy, size):
 		block = Block(posx, posy, size)
@@ -76,16 +73,20 @@ class Minefield:
 	def init_game_area(self):
 		size = self.difficulty.width, self.difficulty.height
 		self.game_area = pygame.Surface(size)
-		self.game_area =self.game_area.convert()
+		self.game_area = self.game_area.convert()
 		self.game_area.fill(colors.game_area_color)
 		self.game_area_pos = self.game_area.get_rect()
 		self.game_area_pos.centerx = globals.background.get_rect().centerx
-		self.game_area_pos.centery = globals.background.get_rect().centery+20
+		self.game_area_pos.centery = globals.background.get_rect().centery + 20
 
 	def debug(self):
 		for b in self.get_blocks():
 			if b.mined:
 				b.image.fill(colors.bombhint)
+		self.blocks[14][18].uncover()	
+		self.blocks[15][19].uncover()	
+		self.blocks[0][19].uncover()	
+		self.blocks[1][19].uncover()	
 
 	def uncover_mines(self):
 		for b in self.get_blocks():

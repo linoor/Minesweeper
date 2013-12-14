@@ -20,7 +20,7 @@ def main():
 
 	#ustawianie planszy
 	normal = Difficulty(20*25+26, 16*25+17, 100, "normal")
-	easy = Difficulty(20*25+21, 16*25+17, 2, "easy")
+	easy = Difficulty(20*25+21, 16*25+17, 40, "easy")
 	game = Game(Minefield(easy))
 	game.new_game()
 
