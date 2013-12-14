@@ -54,8 +54,8 @@ class Minefield:
 				tmp_block = []
 
 	def set_mines_surrounding(self):
-		for i in range(len(self.blocks)):
-			for j in range(len(self.blocks[i])):
+		for i in range(len(self.blocks)-1):
+			for j in range(len(self.blocks[i])-1):
 				if self.blocks[i][j].mined:
 					self.set_mines_around(i,j)
 
@@ -63,7 +63,8 @@ class Minefield:
 		for n in range(i-1, i+2):
 			for m in range(j-1, j+2):
 				if n != m:
-					if self.blocks[n][m]:
+					if n >= 0 and m >= 0 and self.blocks[n][m]:
+						print(n, m)
 						self.blocks[n][m].mines_surrounding += 1
 
 	def create_block(self, posx, posy, size):
