@@ -3,6 +3,7 @@ import colors
 from Block import *
 import random
 import globals
+import itertools
 
 #DEBUG MODE
 DEBUG = True
@@ -15,11 +16,14 @@ class Minefield:
 		self.blocks = []
 		self.game_area = None
 
+	def get_blocks(self):
+		return list(itertools.chain.from_iterable(self.blocks))
+
 	def set_mines(self):
 		random.seed()
-		indices = [random.randint(0, len(self.blocks)-1) for i in range(self.difficulty.mines_number)]
+		indices = [random.randint(0, len(self.get_blocks())-1) for i in range(self.difficulty.mines_number)]
 		for i in indices:
-			self.blocks[i].mine()
+			self.get_blocks()[i].mine()
 
 	def draw(self):
 		# 540, 350
@@ -28,7 +32,7 @@ class Minefield:
 		self.update()
 
 	def update(self):
-		for b in self.blocks:
+		for b in self.get_blocks():
 			self.game_area.blit(b.image, (b.posx, b.posy))
 		globals.background.blit(self.game_area, (self.game_area_pos))
 
@@ -36,13 +40,17 @@ class Minefield:
 		size = 25
 		padding = 1
 		posx, posy = padding, padding
+		tmp_block = []
 		while posy+size < self.difficulty.height:
 			block = self.create_block(posx, posy, size)
 			posx += size + padding
+			# nowy rzad
 			if posx+size > self.difficulty.width:
 				posx = padding
 				posy += size + padding
-			self.blocks.append(block)
+				self.blocks.append(tmp_block)
+				tmp_block = []
+			tmp_block.append(block)
 
 	def create_block(self, posx, posy, size):
 		block = Block(posx, posy, size)
@@ -60,11 +68,11 @@ class Minefield:
 		self.game_area_pos.centery = globals.background.get_rect().centery+20
 
 	def debug(self):
-		for b in self.blocks:
+		for b in self.get_blocks():
 			if b.mined:
 				b.image.fill(colors.bombhint)
 
 	def uncover_mines(self):
-		for b in self.blocks:
+		for b in self.get_blocks():
 			if not (b.flagged or b.question):
 				b.uncover()

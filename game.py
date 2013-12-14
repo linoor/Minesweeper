@@ -10,7 +10,7 @@ class Game:
 		self.minefield = minefield
 		self.clickable = True
 	def find_collide_rect(self, pos):
-		for b in self.minefield.blocks:
+		for b in self.minefield.get_blocks():
 			if b.rect.collidepoint(pos):
 				return b
 	def left_click(self, pos):
@@ -44,15 +44,15 @@ class Game:
 			self.minefield.update()
 	def is_game_over(self):
 		# jesli trafimy na mine
-		if any(not b.covered and b.mined for b in self.minefield.blocks):
+		if any(not b.covered and b.mined for b in self.minefield.get_blocks()):
 			return True
 		# jesli oflagujemy wszystkie miny
 		# wszystkie pola ktore sa zaminowane musza byc oflagowane
-		if all(b.flagged for b in self.minefield.blocks if b.mined):
+		if all(b.flagged for b in self.minefield.get_blocks() if b.mined):
 			return True
 		# jesli odkryjemy wszystkie niezaminowane pola
 		# TODO TEST
-		if all(not b.covered for b in self.minefield.blocks if not b.mined):
+		if all(not b.covered for b in self.minefield.get_blocks() if not b.mined):
 			return True
 
 		return False
@@ -80,6 +80,6 @@ class Game:
 			self.minefield.debug()
 	def check_win(self):
 		# jesli trafimy na mine
-		if any(b.mined and not b.covered for b in self.minefield.blocks):
+		if any(b.mined and not b.covered for b in self.minefield.get_blocks()):
 			return False
 		return True
