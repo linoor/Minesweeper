@@ -24,6 +24,7 @@ class Minefield:
 		indices = [random.randint(0, len(self.get_blocks())-1) for i in range(self.difficulty.mines_number)]
 		for i in indices:
 			self.get_blocks()[i].mine()
+		self.set_mines_surrounding()
 
 	def draw(self):
 		# 540, 350
@@ -51,6 +52,19 @@ class Minefield:
 				posy += size + padding
 				self.blocks.append(tmp_block)
 				tmp_block = []
+
+	def set_mines_surrounding(self):
+		for i in range(len(self.blocks)):
+			for j in range(len(self.blocks[i])):
+				if self.blocks[i][j].mined:
+					self.set_mines_around(i,j)
+
+	def set_mines_around(self, i, j):
+		for n in range(i-1, i+2):
+			for m in range(j-1, j+2):
+				if n != m:
+					if self.blocks[n][m]:
+						self.blocks[n][m].mines_surrounding += 1
 
 	def create_block(self, posx, posy, size):
 		block = Block(posx, posy, size)

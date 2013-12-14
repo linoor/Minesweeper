@@ -51,7 +51,6 @@ class Game:
 		if all(b.flagged for b in self.minefield.get_blocks() if b.mined):
 			return True
 		# jesli odkryjemy wszystkie niezaminowane pola
-		# TODO TEST
 		if all(not b.covered for b in self.minefield.get_blocks() if not b.mined):
 			return True
 

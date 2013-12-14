@@ -26,7 +26,7 @@ class Block(pygame.sprite.Sprite):
 			self.image.fill(colors.uncoveredColor)
 			# ustawianie napisu na polach
 			font = pygame.font.Font(None, 36)
-			text = font.render("0", 1, (10, 10, 10))
+			text = font.render(str(self.mines_surrounding), 1, (10, 10, 10))
 			textpos = text.get_rect()
 			textpos.centerx = self.image.get_rect().centerx
 			textpos.centery = self.image.get_rect().centery
