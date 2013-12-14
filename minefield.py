@@ -43,6 +43,7 @@ class Minefield:
 		tmp_block = []
 		while posy+size < self.difficulty.height:
 			block = self.create_block(posx, posy, size)
+			tmp_block.append(block)
 			posx += size + padding
 			# nowy rzad
 			if posx+size > self.difficulty.width:
@@ -50,7 +51,6 @@ class Minefield:
 				posy += size + padding
 				self.blocks.append(tmp_block)
 				tmp_block = []
-			tmp_block.append(block)
 
 	def create_block(self, posx, posy, size):
 		block = Block(posx, posy, size)
