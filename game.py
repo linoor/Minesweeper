@@ -18,13 +18,17 @@ class Game:
 			b = self.find_collide_rect(pos)
 			if b:
 				if b.covered and not b.flagged and not b.question:
-					b.uncover()	
+					if b.mines_surrounding == 0:
+						self.minefield.ripple_effect(b)
+					else:
+						b.uncover()
 				print(b.rect)
 				print(pos)
 
 			if self.is_game_over():
 				self.end_game()
 			self.minefield.update()
+			
 	def right_click(self, pos):
 		if self.clickable:
 			b = self.find_collide_rect(pos)
@@ -42,6 +46,7 @@ class Game:
 			if self.is_game_over():
 				self.end_game()
 			self.minefield.update()
+
 	def is_game_over(self):
 		# jesli trafimy na mine
 		if any(not b.covered and b.mined for b in self.minefield.get_blocks()):

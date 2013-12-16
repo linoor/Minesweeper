@@ -38,6 +38,28 @@ class Minefield:
 				if n < 16 and m < 20 and n >= 0 and m >= 0 and self.blocks[n][m]:
 					self.blocks[n][m].mines_surrounding += 1
 
+	def ripple_effect(self, block):
+		if block.mines_surrounding == 0 and block.covered:
+			block.uncover()
+			row, column = self.find(block)
+			if row and column:
+				try:
+					self.ripple_effect(self.blocks[row-1][column])
+					self.ripple_effect(self.blocks[row+1][column])
+					self.ripple_effect(self.blocks[row][column-1])
+					self.ripple_effect(self.blocks[row][column+1])
+				except IndexError:
+					pass
+
+	def find(self, elem):
+	    for row, i in enumerate(self.blocks):
+	        try:
+	            column = i.index(elem)
+	        except ValueError:
+	            continue
+	        return row, column
+	    return -1
+
 	def draw(self):
 		self.init_game_area()	
 		self.init_blocks()
