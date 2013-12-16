@@ -75,19 +75,23 @@ class Minefield:
 		padding = 1
 		posx, posy = padding, padding
 		tmp_block = []
+		i, j = 0, 0
 		while posy+size < self.difficulty.height:
-			block = self.create_block(posx, posy, size)
+			j += 1
+			block = self.create_block(posx, posy, size, i, j)
 			tmp_block.append(block)
 			posx += size + padding
 			# nowy rzad
 			if posx+size > self.difficulty.width:
+				i += 1
+				j = 0
 				posx = padding
 				posy += size + padding
 				self.blocks.append(tmp_block)
 				tmp_block = []
 
-	def create_block(self, posx, posy, size):
-		block = Block(posx, posy, size)
+	def create_block(self, posx, posy, size, i, j):
+		block = Block(posx, posy, size, i, j)
 		offset = self.game_area_pos.topleft
 		block.rect.topleft = (posx+offset[0], posy+offset[1])
 		return block

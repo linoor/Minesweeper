@@ -3,7 +3,7 @@ import colors
 from globals import *
 
 class Block(pygame.sprite.Sprite):
-	def __init__(self, posx, posy, size=10):
+	def __init__(self, posx, posy, size, i, j):
 		pygame.sprite.Sprite.__init__(self)
 		self.size = size
 		self.covered = True
@@ -13,6 +13,7 @@ class Block(pygame.sprite.Sprite):
 		self.mines_surrounding = 0
 		self.posx = posx
 		self.posy = posy
+		self.indexes = i, j
 		self.init_image()
 		self.rect = self.image.get_rect()
 	def init_image(self):
