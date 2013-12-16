@@ -43,13 +43,16 @@ class Minefield:
 			block.uncover()
 			row, column = self.find(block)
 			if row and column:
-				try:
-					self.ripple_effect(self.blocks[row-1][column])
-					self.ripple_effect(self.blocks[row+1][column])
-					self.ripple_effect(self.blocks[row][column-1])
-					self.ripple_effect(self.blocks[row][column+1])
-				except IndexError:
-					pass
+				surrounding = [(row-1, column), (row+1, column), (row, column-1), (row, column+1)]
+				for i in surrounding:
+					try:
+						self.ripple_effect(self.blocks[i[0]][i[1]])
+					# self.ripple_effect(self.blocks[row-1][column])
+					# self.ripple_effect(self.blocks[row+1][column])
+					# self.ripple_effect(self.blocks[row][column-1])
+					# self.ripple_effect(self.blocks[row][column+1])
+					except IndexError:
+						pass
 
 	def find(self, elem):
 	    for row, i in enumerate(self.blocks):

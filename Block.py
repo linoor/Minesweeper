@@ -33,7 +33,7 @@ class Block(pygame.sprite.Sprite):
 			textpos.centery = self.image.get_rect().centery
 			self.image.blit(text, textpos)
 		self.covered = False
-		print("coordinates: ", self.posx, self.posy)
+		# print("coordinates: ", self.posx, self.posy)
 	def flag(self):
 		self.image.fill(colors.redColor)
 		self.flagged = True
