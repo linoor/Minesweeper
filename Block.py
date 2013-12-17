@@ -24,14 +24,16 @@ class Block(pygame.sprite.Sprite):
 		if self.mined:
 			self.image.fill(colors.bombColor)	
 		else:
+			# jesli dookola nie ma min, nie ustawiamy cyfry "0"
 			self.image.fill(colors.uncoveredColor)
 			# ustawianie napisu na polach
-			font = pygame.font.Font(None, 36)
-			text = font.render(str(self.mines_surrounding), 1, (10, 10, 10))
-			textpos = text.get_rect()
-			textpos.centerx = self.image.get_rect().centerx
-			textpos.centery = self.image.get_rect().centery
-			self.image.blit(text, textpos)
+			if self.mines_surrounding != 0:
+				font = pygame.font.Font(None, 36)
+				text = font.render(str(self.mines_surrounding), 1, (10, 10, 10))
+				textpos = text.get_rect()
+				textpos.centerx = self.image.get_rect().centerx
+				textpos.centery = self.image.get_rect().centery
+				self.image.blit(text, textpos)
 		self.covered = False
 		# print("coordinates: ", self.posx, self.posy)
 	def flag(self):

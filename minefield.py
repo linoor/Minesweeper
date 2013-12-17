@@ -41,8 +41,6 @@ class Minefield:
 					self.blocks[n][m].mines_surrounding += 1
 
 	def ripple_effect(self, block):
-		global calls
-		calls += 1
 		if not block.covered: return
 		if block.mined or block.flagged: return
 		if block.mines_surrounding != 0: return
