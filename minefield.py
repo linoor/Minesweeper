@@ -43,8 +43,8 @@ class Minefield:
 	def ripple_effect(self, block):
 		if not block.covered: return
 		if block.mined or block.flagged: return
-		if block.mines_surrounding != 0: return
 		block.uncover()
+		if block.mines_surrounding != 0: return
 
 		row_clicked, column_clicked = self.find(block)
 		blocks = self.blocks
