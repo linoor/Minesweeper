@@ -3,7 +3,7 @@ import pygame
 import globals
 
 #DEBUG MODE
-DEBUG = True
+DEBUG = False
 
 class Game:
 	def __init__(self, minefield):
