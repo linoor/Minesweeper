@@ -4,9 +4,11 @@ from Block import *
 import random
 import globals
 import itertools
+import time
 
 #DEBUG MODE
 DEBUG = True
+calls = 0
 
 class Minefield:
 
@@ -39,20 +41,25 @@ class Minefield:
 					self.blocks[n][m].mines_surrounding += 1
 
 	def ripple_effect(self, block):
-		if block.mines_surrounding == 0 and block.covered:
-			block.uncover()
-			row, column = self.find(block)
-			if row and column:
-				surrounding = [(row-1, column), (row+1, column), (row, column-1), (row, column+1)]
-				for i in surrounding:
+		global calls
+		calls += 1
+		if not block.covered: return
+		if block.mined or block.flagged: return
+		if block.mines_surrounding != 0: return
+		block.uncover()
+
+		row_clicked, column_clicked = self.find(block)
+		blocks = self.blocks
+		for i in range(3):
+			for j in range(3):
+				current_row = row_clicked + i - 1
+				current_column = column_clicked + j - 1
+				if blocks[current_row][current_column].covered:
 					try:
-						self.ripple_effect(self.blocks[i[0]][i[1]])
-					# self.ripple_effect(self.blocks[row-1][column])
-					# self.ripple_effect(self.blocks[row+1][column])
-					# self.ripple_effect(self.blocks[row][column-1])
-					# self.ripple_effect(self.blocks[row][column+1])
-					except IndexError:
+						self.ripple_effect(blocks[current_row][current_column])
+					except IndexError as e:
 						pass
+		return
 
 	def find(self, elem):
 	    for row, i in enumerate(self.blocks):
@@ -117,3 +124,4 @@ class Minefield:
 		for b in self.get_blocks():
 			if b.mined:
 				b.uncover()
+		print(calls)
