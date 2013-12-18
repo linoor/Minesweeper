@@ -8,6 +8,7 @@ from difficulty import *
 from globals import *
 
 def main():
+	pygame.font.init()
 	pygame.init()
 	pygame.display.set_caption('Saper')
 	
@@ -23,6 +24,7 @@ def main():
 	easy = Difficulty(20*25+21, 16*25+17, 40, "easy")
 	game = Game(Minefield(easy))
 	game.new_game()
+	game.show_clock()
 
 	screen.blit(background, (0,0))
 	pygame.display.flip()
@@ -44,6 +46,8 @@ def main():
 				if event.button == 3:
 					print(event.pos)
 					game.right_click(event.pos)
+			if event.type == UPDATECLOCKEVENT:
+					game.update_clock()	
 
 			screen.blit(background, (0,0))
 			pygame.display.flip()

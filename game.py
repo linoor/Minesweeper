@@ -5,8 +5,11 @@ import globals
 #DEBUG MODE
 DEBUG = False
 
+
+
 class Game:
 	def __init__(self, minefield):
+		self.clock = 0
 		self.minefield = minefield
 		self.clickable = True
 	def find_collide_rect(self, pos):
@@ -87,3 +90,13 @@ class Game:
 		if any(b.mined and not b.covered for b in self.minefield.get_blocks()):
 			return False
 		return True
+	def show_clock(self):
+		clock_font = pygame.font.Font(None, 36)		
+		text = clock_font.render(str(0), 1, (10, 10, 10))
+		textpos = text.get_rect()
+		textpos.topleft = globals.screen.get_rect().topleft
+		globals.background.blit(text, textpos)	
+		print("ASDASDASDASD", textpos)
+		self.minefield.update()
+	def update_clock():
+		pass

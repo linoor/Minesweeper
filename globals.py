@@ -11,3 +11,6 @@ global background
 background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill(colors.orangeColor)
+
+# event odliczania czasu
+UPDATECLOCKEVENT = pygame.USEREVENT + 1
