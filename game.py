@@ -92,7 +92,7 @@ class Game:
 		return True
 	def show_clock(self):
 		clock_font = pygame.font.Font(None, 36)		
-		text = clock_font.render(str(0), 1, (10, 10, 10))
+		text = clock_font.render(str(0).zfill(2), 1, (10, 10, 10))
 		textpos = text.get_rect()
 		textpos.topleft = globals.screen.get_rect().topleft
 		globals.background.blit(text, textpos)	
