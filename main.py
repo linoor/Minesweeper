@@ -47,7 +47,7 @@ def main():
 					print(event.pos)
 					game.right_click(event.pos)
 			if event.type == UPDATECLOCKEVENT:
-					game.update_clock()	
+					game.update_clock()
 
 			screen.blit(background, (0,0))
 			pygame.display.flip()

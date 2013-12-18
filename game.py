@@ -13,6 +13,7 @@ class Game:
 		self.clickable = True
 		self.clock = self.init_clock()
 		self.clock.show_clock()
+		self.first_click = False
 
 	def init_clock(self):
 		rect = globals.screen.get_rect()
@@ -90,6 +91,7 @@ class Game:
 	def new_game(self):
 		self.minefield.draw()
 		self.minefield.set_mines()
+		self.clock.start_clock()
 		if DEBUG:
 			self.minefield.debug()
 	def check_win(self):
@@ -97,3 +99,7 @@ class Game:
 		if any(b.mined and not b.covered for b in self.minefield.get_blocks()):
 			return False
 		return True
+	def update_clock(self):
+		globals.refresh_background()
+		self.minefield.update()
+		self.clock.update()

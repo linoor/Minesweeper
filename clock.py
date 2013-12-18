@@ -1,4 +1,5 @@
 import globals
+import colors
 import pygame
 
 class Clock:
@@ -11,3 +12,9 @@ class Clock:
 		globals.background.blit(text, self.pos)
 	def update(self):
 		self.time += 1
+		tmp = pygame.Surface((36, 36))
+		tmp.fill(colors.orangeColor)
+		globals.background.blit(tmp, self.pos)
+		self.show_clock()
+	def start_clock(self):
+		pygame.time.set_timer(globals.UPDATECLOCKEVENT, 1000)

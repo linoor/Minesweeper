@@ -14,3 +14,6 @@ background.fill(colors.orangeColor)
 
 # event odliczania czasu
 UPDATECLOCKEVENT = pygame.USEREVENT + 1
+
+def refresh_background():
+	screen.blit(background, (0,0))	
