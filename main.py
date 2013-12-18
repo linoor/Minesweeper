@@ -24,7 +24,7 @@ def main():
 	easy = Difficulty(20*25+21, 16*25+17, 40, "easy")
 	game = Game(Minefield(easy))
 	game.new_game()
-	game.show_clock()
+	game.clock.show_clock()
 
 	screen.blit(background, (0,0))
 	pygame.display.flip()

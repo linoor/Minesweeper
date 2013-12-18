@@ -1,17 +1,24 @@
 from Block import Block
 import pygame
 import globals
+from clock import *
 
 #DEBUG MODE
 DEBUG = False
-
-
 
 class Game:
 	def __init__(self, minefield):
 		self.clock = 0
 		self.minefield = minefield
 		self.clickable = True
+		self.clock = self.init_clock()
+		self.clock.show_clock()
+
+	def init_clock(self):
+		rect = globals.screen.get_rect()
+		pos = rect.left + 70, rect.top + 20
+		return Clock(pos)
+
 	def find_collide_rect(self, pos):
 		for b in self.minefield.get_blocks():
 			if b.rect.collidepoint(pos):
@@ -86,17 +93,7 @@ class Game:
 		if DEBUG:
 			self.minefield.debug()
 	def check_win(self):
-		# jesli trafimy na mine
+		# jesli trafimy na mine - przegrana
 		if any(b.mined and not b.covered for b in self.minefield.get_blocks()):
 			return False
 		return True
-	def show_clock(self):
-		clock_font = pygame.font.Font(None, 36)		
-		text = clock_font.render(str(0).zfill(2), 1, (10, 10, 10))
-		textpos = text.get_rect()
-		textpos.topleft = globals.screen.get_rect().topleft
-		globals.background.blit(text, textpos)	
-		print("ASDASDASDASD", textpos)
-		self.minefield.update()
-	def update_clock():
-		pass
