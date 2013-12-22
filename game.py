@@ -30,7 +30,8 @@ class Game:
 			if self.first_click:
 				self.first_click = False
 				self.clock.start_clock()
-				
+
+			# znajdujemy kliniete pole
 			b = self.find_collide_rect(pos)
 			if b:
 				if b.covered and not b.flagged and not b.question:
@@ -93,6 +94,8 @@ class Game:
 		globals.background.blit(text, textpos)
 		# wylaczenie mozliwosci odkrywania pol
 		self.clickable = False
+		# wylaczenie zegara
+		self.clock.stop_clock()
 	def new_game(self):
 		self.minefield.draw()
 		self.minefield.set_mines()
