@@ -13,7 +13,7 @@ class Game:
 		self.clickable = True
 		self.clock = self.init_clock()
 		self.clock.show_clock()
-		self.first_click = False
+		self.first_click = True
 
 	def init_clock(self):
 		rect = globals.screen.get_rect()
@@ -26,6 +26,11 @@ class Game:
 				return b
 	def left_click(self, pos):
 		if self.clickable:
+			# jesli pierwsze klikniecie, to rozpoczynamy odliczenie zegara
+			if self.first_click:
+				self.first_click = False
+				self.clock.start_clock()
+				
 			b = self.find_collide_rect(pos)
 			if b:
 				if b.covered and not b.flagged and not b.question:
@@ -91,7 +96,6 @@ class Game:
 	def new_game(self):
 		self.minefield.draw()
 		self.minefield.set_mines()
-		self.clock.start_clock()
 		if DEBUG:
 			self.minefield.debug()
 	def check_win(self):
