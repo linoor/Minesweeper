@@ -16,7 +16,7 @@ class Clock:
 		if not self.running:
 			return
 		self.time += 1
-		tmp = pygame.Surface((36, 36))
+		tmp = pygame.Surface((3*36+2, 40))
 		tmp.fill(colors.orangeColor)
 		globals.background.blit(tmp, self.pos)
 		self.show_clock()
