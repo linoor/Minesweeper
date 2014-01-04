@@ -21,5 +21,5 @@ class Counter:
 	
 	def clear_counter(self):
 		tmp = pygame.Surface((3*36+2, 30))
-		tmp.fill(colors.orangeColor)
+		tmp.fill(colors.blueColor)
 		globals.background.blit(tmp, self.pos)

@@ -14,7 +14,7 @@ def start_new_game(difficulty):
 
 def initialize_screen():
 	#menu
-	background.fill(colors.orangeColor)
+	background.fill(colors.blueColor)
 	font = pygame.font.Font("oxin.ttf", 36)
 	text = font.render("Saper!", 1, (10, 10, 10))
 	textpos = text.get_rect()

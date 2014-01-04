@@ -105,7 +105,7 @@ class Game:
 
 		return False
 	def end_game(self):
-		font = pygame.font.Font(None, 36)
+		font = pygame.font.Font("oxin.ttf", 18)
 		# wygrana
 		if self.check_win():
 			self.text = font.render("You win!", 1, (0, 255, 34))
@@ -116,8 +116,8 @@ class Game:
 		self.minefield.uncover_mines()
 		# umiejscowienie napisu
 		textpos = self.text.get_rect()
-		textpos.centerx = globals.background.get_rect().centerx
-		textpos.centery = self.minefield.game_area.get_rect().top+40
+		textpos.centerx = globals.background.get_rect().centerx - 3
+		textpos.centery = self.minefield.game_area.get_rect().top+48
 		globals.background.blit(self.text, textpos)
 		# wylaczenie mozliwosci odkrywania pol
 		self.clickable = False
@@ -145,7 +145,7 @@ class Game:
 
 	def clear_win_lose(self):
 		tmp = pygame.Surface((110, 30))
-		tmp.fill(colors.orangeColor)	
+		tmp.fill(colors.blueColor)	
 		tmp_pos = tmp.get_rect()
 		tmp_pos.centerx = globals.background.get_rect().centerx
 		tmp_pos.y = 30
