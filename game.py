@@ -1,4 +1,5 @@
 from Block import Block
+from counter import Counter
 import pygame
 import globals
 from clock import *
@@ -14,6 +15,16 @@ class Game:
 		self.clock = self.init_clock()
 		self.clock.show_clock()
 		self.first_click = True
+
+		#ustawienia licznika
+		self.counter = None
+		self.init_counter()
+
+	def init_counter(self):
+		rect = globals.screen.get_rect()
+		size = 36
+		pos = rect.right - 70-size, rect.top + 30
+		self.counter = Counter(self.minefield.difficulty.mines_number, pos)
 
 	def init_clock(self):
 		rect = globals.screen.get_rect()
