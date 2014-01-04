@@ -67,8 +67,14 @@ class Game:
 				if b.covered:
 					if not b.flagged and not b.question:
 						b.flag()
+						#update counter
+						self.counter.mines -= 1
+						self.counter.update()
 					elif b.flagged:
 						Block.question(b)
+						#update counter	
+						self.counter.mines += 1
+						self.counter.update()
 					elif b.question:
 						b.cover()
 				print(b.rect)

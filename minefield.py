@@ -57,11 +57,11 @@ class Minefield:
 			for j in range(3):
 				current_row = row_clicked + i - 1
 				current_column = column_clicked + j - 1
-				if blocks[current_row][current_column].covered:
-					try:
+				try:
+					if blocks[current_row][current_column].covered:
 						self.ripple_effect(blocks[current_row][current_column])
-					except IndexError as e:
-						pass
+				except IndexError as e:
+					pass
 		return
 
 	def find(self, elem):

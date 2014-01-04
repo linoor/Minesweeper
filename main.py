@@ -54,6 +54,7 @@ def main():
 					pygame.quit()
 					sys.exit()
 				if event.key == K_n:
+					screen.blit(background, (0,0))
 					game = start_new_game(easy)
 					game.clock.clear_clock()
 					game.clock.stop_clock()
