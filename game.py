@@ -26,13 +26,16 @@ class Game:
 				return b
 	def left_click(self, pos):
 		if self.clickable:
-			# jesli pierwsze klikniecie, to rozpoczynamy odliczenie zegara
-			if self.first_click:
-				self.first_click = False
-				self.clock.start_clock()
 
 			# znajdujemy kliniete pole
 			b = self.find_collide_rect(pos)
+
+			# jesli pierwsze klikniecie, to rozpoczynamy odliczenie zegara
+			if self.first_click:
+				self.first_click = False
+				self.minefield.set_mines(b)
+				self.clock.start_clock()
+
 			if b:
 				if b.covered and not b.flagged and not b.question:
 					if b.mines_surrounding == 0:
@@ -98,7 +101,6 @@ class Game:
 		self.clock.stop_clock()
 	def new_game(self):
 		self.minefield.draw()
-		self.minefield.set_mines()
 		if DEBUG:
 			self.minefield.debug()
 	def check_win(self):

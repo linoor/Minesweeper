@@ -21,10 +21,13 @@ class Minefield:
 	def get_blocks(self):
 		return list(itertools.chain.from_iterable(self.blocks))
 
-	def set_mines(self):
+	def set_mines(self, block):
 		random.seed()
 		for _ in range(self.difficulty.mines_number):
-			self.get_blocks()[random.randint(0, len(self.get_blocks())-1)].mine()
+			blocks = self.get_blocks()
+			selected_block = blocks[random.randint(0, len(blocks)-1)]
+			if block != selected_block:
+				selected_block.mine()
 
 		self.set_mines_surrounding()
 
