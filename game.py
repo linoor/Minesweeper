@@ -144,9 +144,9 @@ class Game:
 		self.clock.update()
 
 	def clear_win_lose(self):
-		tmp = pygame.Surface((100, 30))
-		tmp.fill(colors.redColor)	
-		tmp_pos = globals.background.get_rect()
-		tmp_pos.x = 0
-		tmp_pos.y = 0
+		tmp = pygame.Surface((110, 30))
+		tmp.fill(colors.orangeColor)	
+		tmp_pos = tmp.get_rect()
+		tmp_pos.centerx = globals.background.get_rect().centerx
+		tmp_pos.y = 30
 		globals.background.blit(tmp, tmp_pos)
