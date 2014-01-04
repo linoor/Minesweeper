@@ -5,7 +5,7 @@ import pygame
 class Clock:
 	def __init__(self, pos):
 		self.time = 0
-		self.pos = 	pos	
+		self.pos = pos	
 		self.running = True
 	def show_clock(self):
 		clock_font = pygame.font.Font(None, 36)
@@ -19,7 +19,7 @@ class Clock:
 		self.clear_clock()	
 		self.show_clock()
 	def clear_clock(self):
-		tmp = pygame.Surface((3*36+2, 40))
+		tmp = pygame.Surface((3*36+2, 30))
 		tmp.fill(colors.orangeColor)
 		globals.background.blit(tmp, self.pos)
 	def start_clock(self):

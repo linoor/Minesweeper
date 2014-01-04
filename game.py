@@ -17,7 +17,7 @@ class Game:
 
 	def init_clock(self):
 		rect = globals.screen.get_rect()
-		pos = rect.left + 70, rect.top + 20
+		pos = rect.left + 70, rect.top + 30
 		return Clock(pos)
 
 	def find_collide_rect(self, pos):
