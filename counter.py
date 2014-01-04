@@ -15,7 +15,7 @@ class Counter:
 
 	def update(self):
 		# jesli gra sie zakonczyla, zatrzymaj zegar
-		if self.mines <= 0: return
+		if self.mines < 0: return
 		self.clear_counter()	
 		self.show_counter()
 	

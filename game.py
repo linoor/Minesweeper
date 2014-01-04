@@ -65,7 +65,7 @@ class Game:
 			b = self.find_collide_rect(pos)
 			if b:
 				if b.covered:
-					if not b.flagged and not b.question:
+					if not b.flagged and not b.question and self.counter.mines > 0:
 						b.flag()
 						#update counter
 						self.counter.mines -= 1
