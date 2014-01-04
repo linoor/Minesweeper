@@ -7,6 +7,12 @@ from game import *
 from difficulty import *
 from globals import *
 
+def start_new_game(difficulty):
+	game = Game(Minefield(difficulty))
+	game.new_game()
+	game.clock.show_clock()
+	return game
+
 def main():
 	pygame.font.init()
 	pygame.init()
@@ -19,15 +25,23 @@ def main():
 	textpos.centerx = background.get_rect().centerx
 	background.blit(text, textpos)
 
+	#napis nowej gry
+	font = pygame.font.Font(None, 20)
+	text = font.render("press 'n' to start new game", 1, (0, 0, 0))
+	textpos = text.get_rect()
+	textpos.topright = background.get_rect().topright
+	background.blit(text, textpos)
+
 	#ustawianie planszy
 	normal = Difficulty(20*25+26, 16*25+17, 100, "normal")
 	easy = Difficulty(20*25+21, 16*25+17, 40, "easy")
-	game = Game(Minefield(easy))
-	game.new_game()
-	game.clock.show_clock()
+	start_new_game(normal)
 
 	screen.blit(background, (0,0))
 	pygame.display.flip()
+
+	#rozpoczynanie gry
+	game = start_new_game(normal)
 
 	# glowna petla
 	while True:
@@ -39,6 +53,9 @@ def main():
 				if event.key == K_ESCAPE:
 					pygame.quit()
 					sys.exit()
+				if event.key == K_n:
+					game = start_new_game(normal)
+
 			if event.type == MOUSEBUTTONDOWN: #handler poruszania myszka
 				if event.button == 1:
 					print(event.pos)
