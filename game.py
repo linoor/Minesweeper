@@ -27,12 +27,12 @@ class Game:
 	def init_counter(self):
 		rect = globals.screen.get_rect()
 		size = 36
-		pos = rect.right - 70-size, rect.top + 30
+		pos = rect.right - 70-size, rect.top + 28
 		self.counter = Counter(self.minefield.difficulty.mines_number, pos)
 
 	def init_clock(self):
 		rect = globals.screen.get_rect()
-		pos = rect.left + 70, rect.top + 30
+		pos = rect.left + 70, rect.top + 28
 		return Clock(pos)
 
 	def find_collide_rect(self, pos):
