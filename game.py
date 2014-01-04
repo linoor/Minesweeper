@@ -3,6 +3,7 @@ from counter import Counter
 import pygame
 import globals
 from clock import *
+import colors
 
 #DEBUG MODE
 DEBUG = False
@@ -130,6 +131,7 @@ class Game:
 		self.counter.clear_counter()
 		self.counter.show_counter()
 		self.minefield.draw()
+		self.clear_win_lose()
 		if DEBUG:
 			self.minefield.debug()
 	def check_win(self):
@@ -145,7 +147,6 @@ class Game:
 		tmp = pygame.Surface((100, 30))
 		tmp.fill(colors.redColor)	
 		tmp_pos = globals.background.get_rect()
-		tmp_pos.centerx = globals.background.get_rect().centerx
-		tmp_pos.centery = self.minefield.game_area.get_rect().top+40
+		tmp_pos.x = 0
+		tmp_pos.y = 0
 		globals.background.blit(tmp, tmp_pos)
-		print("ASDASDASD")
