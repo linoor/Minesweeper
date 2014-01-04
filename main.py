@@ -55,6 +55,9 @@ def main():
 					sys.exit()
 				if event.key == K_n:
 					game = start_new_game(normal)
+					game.clock.clear_clock()
+					game.clock.stop_clock()
+					game.clock.show_clock()
 
 			if event.type == MOUSEBUTTONDOWN: #handler poruszania myszka
 				if event.button == 1:

@@ -16,11 +16,14 @@ class Clock:
 		if not self.running:
 			return
 		self.time += 1
+		self.clear_clock()	
+		self.show_clock()
+	def clear_clock(self):
 		tmp = pygame.Surface((3*36+2, 40))
 		tmp.fill(colors.orangeColor)
 		globals.background.blit(tmp, self.pos)
-		self.show_clock()
 	def start_clock(self):
 		pygame.time.set_timer(globals.UPDATECLOCKEVENT, 1000)
+		self.running = True
 	def stop_clock(self):
 		self.running = False
