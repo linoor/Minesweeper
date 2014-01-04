@@ -27,21 +27,21 @@ def main():
 
 	#napis nowej gry
 	font = pygame.font.Font(None, 20)
-	text = font.render("press 'n' to start new game", 1, (0, 0, 0))
+	text = font.render("press 'n' to start a new game", 1, (0, 0, 0))
 	textpos = text.get_rect()
 	textpos.topright = background.get_rect().topright
 	background.blit(text, textpos)
 
 	#ustawianie planszy
-	normal = Difficulty(20*25+26, 16*25+17, 100, "normal")
+	normal = Difficulty(20*25+21, 16*25+17, 100, "normal")
 	easy = Difficulty(20*25+21, 16*25+17, 40, "easy")
-	start_new_game(normal)
+	start_new_game(easy)
 
 	screen.blit(background, (0,0))
 	pygame.display.flip()
 
 	#rozpoczynanie gry
-	game = start_new_game(normal)
+	game = start_new_game(easy)
 
 	# glowna petla
 	while True:
@@ -54,7 +54,7 @@ def main():
 					pygame.quit()
 					sys.exit()
 				if event.key == K_n:
-					game = start_new_game(normal)
+					game = start_new_game(easy)
 					game.clock.clear_clock()
 					game.clock.stop_clock()
 					game.clock.show_clock()

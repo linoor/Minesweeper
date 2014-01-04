@@ -17,6 +17,7 @@ class Minefield:
 		self.difficulty = difficulty
 		self.blocks = []
 		self.game_area = None
+		self.are_mines_set = False
 
 	def get_blocks(self):
 		return list(itertools.chain.from_iterable(self.blocks))
@@ -30,6 +31,7 @@ class Minefield:
 				selected_block.mine()
 
 		self.set_mines_surrounding()
+		self.are_mines_set = True
 
 	def set_mines_surrounding(self):
 		for i in range(len(self.blocks)):

@@ -68,6 +68,9 @@ class Game:
 			self.minefield.update()
 
 	def is_game_over(self):
+		# jesli miny jeszcze nie sa ustawione
+		if not self.minefield.are_mines_set:
+			return False
 		# jesli trafimy na mine
 		if any(not b.covered and b.mined for b in self.minefield.get_blocks()):
 			return True
