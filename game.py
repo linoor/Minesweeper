@@ -20,6 +20,9 @@ class Game:
 		self.counter = None
 		self.init_counter()
 
+		#napis wygranej/przegranej
+		self.text = None
+
 	def init_counter(self):
 		rect = globals.screen.get_rect()
 		size = 36
@@ -104,22 +107,28 @@ class Game:
 		font = pygame.font.Font(None, 36)
 		# wygrana
 		if self.check_win():
-			text = font.render("You win!", 1, (0, 255, 34))
+			self.text = font.render("You win!", 1, (0, 255, 34))
 		# przegrana
 		else:
-			text = font.render("You lose!", 1, (255, 0, 0))
+			self.text = font.render("You lose!", 1, (255, 0, 0))
 		# odkrywanie wszystkich min
 		self.minefield.uncover_mines()
 		# umiejscowienie napisu
-		textpos = text.get_rect()
+		textpos = self.text.get_rect()
 		textpos.centerx = globals.background.get_rect().centerx
 		textpos.centery = self.minefield.game_area.get_rect().top+40
-		globals.background.blit(text, textpos)
+		globals.background.blit(self.text, textpos)
 		# wylaczenie mozliwosci odkrywania pol
 		self.clickable = False
 		# wylaczenie zegara
 		self.clock.stop_clock()
 	def new_game(self):
+		#czyszczenie
+		self.clock.clear_clock()
+		self.clock.stop_clock()
+		self.clock.show_clock()
+		self.counter.clear_counter()
+		self.counter.show_counter()
 		self.minefield.draw()
 		if DEBUG:
 			self.minefield.debug()
@@ -129,6 +138,14 @@ class Game:
 			return False
 		return True
 	def update_clock(self):
-		globals.refresh_background()
 		self.minefield.update()
 		self.clock.update()
+
+	def clear_win_lose(self):
+		tmp = pygame.Surface((100, 30))
+		tmp.fill(colors.redColor)	
+		tmp_pos = globals.background.get_rect()
+		tmp_pos.centerx = globals.background.get_rect().centerx
+		tmp_pos.centery = self.minefield.game_area.get_rect().top+40
+		globals.background.blit(tmp, tmp_pos)
+		print("ASDASDASD")

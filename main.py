@@ -10,19 +10,11 @@ from globals import *
 def start_new_game(difficulty):
 	game = Game(Minefield(difficulty))
 	game.new_game()
-	game.clock.clear_clock()
-	game.clock.stop_clock()
-	game.clock.show_clock()
-	game.counter.clear_counter()
-	game.counter.show_counter()
 	return game
 
-def main():
-	pygame.font.init()
-	pygame.init()
-	pygame.display.set_caption('Saper')
-	
-	# Menu
+def initialize_screen():
+	#menu
+	background.fill(colors.orangeColor)
 	font = pygame.font.Font(None, 36)
 	text = font.render("Saper!", 1, (10, 10, 10))
 	textpos = text.get_rect()
@@ -35,13 +27,20 @@ def main():
 	textpos = text.get_rect()
 	textpos.topright = background.get_rect().topright
 	background.blit(text, textpos)
+	screen.blit(background, (0,0))
+
+def main():
+	pygame.font.init()
+	pygame.init()
+	pygame.display.set_caption('Saper')
+
+	initialize_screen()
 
 	#ustawianie planszy
 	normal = Difficulty(20*25+21, 16*25+17, 100, "normal")
 	easy = Difficulty(20*25+21, 16*25+17, 40, "easy")
 	debug = Difficulty(20*25+21, 16*25+17, 5, "debug")
 
-	screen.blit(background, (0,0))
 	pygame.display.flip()
 
 	#rozpoczynanie gry
