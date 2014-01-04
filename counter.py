@@ -9,7 +9,7 @@ class Counter:
 		self.show_counter()
 
 	def show_counter(self):
-		counter_font = pygame.font.Font(None, 36)
+		counter_font = pygame.font.Font("digit.TTF", 36)
 		text = counter_font.render(str(self.mines).zfill(2), 1, (10, 10, 10))
 		globals.background.blit(text, self.pos)
 

@@ -10,7 +10,11 @@ from globals import *
 def start_new_game(difficulty):
 	game = Game(Minefield(difficulty))
 	game.new_game()
+	game.clock.clear_clock()
+	game.clock.stop_clock()
 	game.clock.show_clock()
+	game.counter.clear_counter()
+	game.counter.show_counter()
 	return game
 
 def main():
@@ -56,9 +60,6 @@ def main():
 				if event.key == K_n:
 					screen.blit(background, (0,0))
 					game = start_new_game(easy)
-					game.clock.clear_clock()
-					game.clock.stop_clock()
-					game.clock.show_clock()
 
 			if event.type == MOUSEBUTTONDOWN: #handler poruszania myszka
 				if event.button == 1:
