@@ -29,12 +29,13 @@ class Block(pygame.sprite.Sprite):
 			self.image = pygame.image.load('ikonki/nieaktywne.png')
 			# ustawianie napisu na polach
 			if self.mines_surrounding != 0:
-				font = pygame.font.Font(None, 36)
-				text = font.render(str(self.mines_surrounding), 1, (10, 10, 10))
-				textpos = text.get_rect()
-				textpos.centerx = self.image.get_rect().centerx
-				textpos.centery = self.image.get_rect().centery
-				self.image.blit(text, textpos)
+				self.image = pygame.image.load('ikonki/%d.png' % self.mines_surrounding)
+				# font = pygame.font.Font(None, 36)
+				# text = font.render(str(self.mines_surrounding), 1, (10, 10, 10))
+				# textpos = text.get_rect()
+				# textpos.centerx = self.image.get_rect().centerx
+				# textpos.centery = self.image.get_rect().centery
+				# self.image.blit(text, textpos)
 		self.covered = False
 		# print("coordinates: ", self.posx, self.posy)
 	def flag(self):
