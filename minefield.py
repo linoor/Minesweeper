@@ -47,7 +47,7 @@ class Minefield:
 
 	def ripple_effect(self, block):
 		if not block.covered: return
-		if block.mined or block.flagged: return
+		if block.mined or block.flagged or block.question: return
 		block.uncover()
 		if block.mines_surrounding != 0: return
 
@@ -58,10 +58,12 @@ class Minefield:
 				current_row = row_clicked + i - 1
 				current_column = column_clicked + j - 1
 				try:
+					if current_row >= len(self.blocks) or current_column >= len(self.blocks[0]): return
+					if current_row < 0 or current_column < 0: return
 					if blocks[current_row][current_column].covered:
 						self.ripple_effect(blocks[current_row][current_column])
 				except IndexError as e:
-					pass
+					print(current_row, current_column)
 		return
 
 	def find(self, elem):
