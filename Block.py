@@ -48,6 +48,6 @@ class Block(pygame.sprite.Sprite):
 	def cover(self):
 		self.flagged = False
 		self.question = False
-		self.image = pygame.image.load('ikonki/nieaktywne.png')
+		self.image = pygame.image.load('ikonki/aktywne.png')
 	def mine(self):
 		self.mined = True
