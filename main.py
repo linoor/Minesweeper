@@ -15,8 +15,8 @@ def start_new_game(difficulty):
 def initialize_screen():
 	#menu
 	background.fill(colors.backgroundColor)
-	font = pygame.font.Font("oxin.ttf", 36)
-	text = font.render("Saper!", 1, colors.napisyColor)
+	font = pygame.font.Font(globals.font, 36)
+	text = font.render("SAPER!", 1, colors.napisyColor)
 	textpos = text.get_rect()
 	textpos.centerx = background.get_rect().centerx
 	background.blit(text, textpos)
@@ -38,9 +38,9 @@ def main():
 	initialize_screen()
 
 	#ustawianie planszy
-	normal = Difficulty(20*25+21, 16*25+17, 100, "normal")
-	easy = Difficulty(20*25+21, 16*25+17, 40, "easy")
-	debug = Difficulty(20*25+21, 16*25+17, 5, "debug")
+	normal = Difficulty(18*25+19, 16*25+17, 100, "normal")
+	easy = Difficulty(18*25+19, 16*25+17, 40, "easy")
+	debug = Difficulty(18*25+19, 16*25+17, 5, "debug")
 
 	pygame.display.flip()
 

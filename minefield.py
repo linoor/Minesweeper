@@ -18,6 +18,8 @@ class Minefield:
 		self.blocks = []
 		self.game_area = None
 		self.are_mines_set = False
+		self.rows = 0
+		self.columns = 0
 
 	def get_blocks(self):
 		return list(itertools.chain.from_iterable(self.blocks))
@@ -42,7 +44,7 @@ class Minefield:
 	def set_mines_around(self, i, j):
 		for n in range(i-1, i+2):
 			for m in range(j-1, j+2):
-				if n < 16 and m < 20 and n >= 0 and m >= 0 and self.blocks[n][m]:
+				if n < self.rows and m < self.columns and n >= 0 and m >= 0 and self.blocks[n][m]:
 					self.blocks[n][m].mines_surrounding += 1
 
 	def ripple_effect(self, block):
@@ -58,8 +60,8 @@ class Minefield:
 				current_row = row_clicked + i - 1
 				current_column = column_clicked + j - 1
 				try:
-					if current_row >= len(self.blocks) or current_column >= len(self.blocks[0]): return
-					if current_row < 0 or current_column < 0: return
+					if current_row >= self.rows or current_column >= self.columns: continue
+					if current_row < 0 or current_column < 0: continue
 					if blocks[current_row][current_column].covered:
 						self.ripple_effect(blocks[current_row][current_column])
 				except IndexError as e:
@@ -104,6 +106,8 @@ class Minefield:
 				posy += size + padding
 				self.blocks.append(tmp_block)
 				tmp_block = []
+		self.rows = len(self.blocks)
+		self.columns = len(self.blocks[0])
 
 	def create_block(self, posx, posy, size, i, j):
 		block = Block(posx, posy, size, i, j)

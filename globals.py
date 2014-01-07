@@ -1,10 +1,15 @@
 import pygame
 import colors
 
-screen_size = 600, 500
+screen_height = 600
+screen_width = 500
 # ustawianie wielkosci okna
 global screen
-screen = pygame.display.set_mode(screen_size)
+screen = pygame.display.set_mode([screen_width, screen_height])
+
+#czcionka
+font = "Kenzo.otf"
+counter_and_clock_font = "Kenzo.otf"
 
 # ustawienia tla
 global background
