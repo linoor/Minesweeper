@@ -17,15 +17,16 @@ class Block(pygame.sprite.Sprite):
 		self.init_image()
 		self.rect = self.image.get_rect()
 	def init_image(self):
-		self.image = pygame.Surface((self.size, self.size))
+		self.image = pygame.image.load('ikonki/aktywne.png')
 		self.image = self.image.convert()
-		self.image.fill(colors.coveredColor)
-	def uncover(self):
-		if self.mined:
-			self.image.fill(colors.bombColor)	
+	def uncover(self, exploded=False):
+		if self.mined and not exploded:
+			self.image = pygame.image.load('ikonki/mina.png')
+		elif self.mined and exploded:
+			self.image = pygame.image.load('ikonki/mina1.png')
 		else:
 			# jesli dookola nie ma min, nie ustawiamy cyfry "0"
-			self.image.fill(colors.uncoveredColor)
+			self.image = pygame.image.load('ikonki/nieaktywne.png')
 			# ustawianie napisu na polach
 			if self.mines_surrounding != 0:
 				font = pygame.font.Font(None, 36)
@@ -37,15 +38,15 @@ class Block(pygame.sprite.Sprite):
 		self.covered = False
 		# print("coordinates: ", self.posx, self.posy)
 	def flag(self):
-		self.image.fill(colors.redColor)
+		self.image = pygame.image.load('ikonki/flag.png')
 		self.flagged = True
 	def question(self):
 		self.flagged = False
 		self.question = True
-		self.image.fill(colors.questionColor)
+		self.image = pygame.image.load('ikonki/mark.png')
 	def cover(self):
 		self.flagged = False
 		self.question = False
-		self.image.fill(colors.coveredColor)
+		self.image = pygame.image.load('ikonki/nieaktywne.png')
 	def mine(self):
 		self.mined = True

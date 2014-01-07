@@ -61,7 +61,7 @@ class Game:
 				print(pos)
 
 			if self.is_game_over():
-				self.end_game()
+				self.end_game(b)
 			self.minefield.update()
 			
 	def right_click(self, pos):
@@ -104,7 +104,7 @@ class Game:
 			return True
 
 		return False
-	def end_game(self):
+	def end_game(self, clicked_block):
 		font = pygame.font.Font("oxin.ttf", 18)
 		# wygrana
 		if self.check_win():
@@ -113,7 +113,7 @@ class Game:
 		else:
 			self.text = font.render("You lose!", 1, (255, 0, 0))
 		# odkrywanie wszystkich min
-		self.minefield.uncover_mines()
+		self.minefield.uncover_mines(clicked_block)
 		# umiejscowienie napisu
 		textpos = self.text.get_rect()
 		textpos.centerx = globals.background.get_rect().centerx - 3
@@ -145,7 +145,7 @@ class Game:
 
 	def clear_win_lose(self):
 		tmp = pygame.Surface((110, 30))
-		tmp.fill(colors.blueColor)	
+		tmp.fill(colors.backgroundColor)	
 		tmp_pos = tmp.get_rect()
 		tmp_pos.centerx = globals.background.get_rect().centerx
 		tmp_pos.y = 30

@@ -14,21 +14,21 @@ def start_new_game(difficulty):
 
 def initialize_screen():
 	#menu
-	background.fill(colors.blueColor)
+	background.fill(colors.backgroundColor)
 	font = pygame.font.Font("oxin.ttf", 36)
-	text = font.render("Saper!", 1, (10, 10, 10))
+	text = font.render("Saper!", 1, colors.napisyColor)
 	textpos = text.get_rect()
 	textpos.centerx = background.get_rect().centerx
 	background.blit(text, textpos)
 
 	#napis nowej gry
-	font = pygame.font.Font("eth.ttf", 15)
-	text = font.render("press 'n' to start a new game", 1, (0, 0, 0))
-	textpos = text.get_rect()
-	textpos.topright = background.get_rect().topright
-	textpos.x = textpos.x-5
-	background.blit(text, textpos)
-	screen.blit(background, (0,0))
+	# font = pygame.font.Font("eth.ttf", 15)
+	# text = font.render("press 'n' to start a new game", 1, colors.napisyColor)
+	# textpos = text.get_rect()
+	# textpos.topright = background.get_rect().topright
+	# textpos.x = textpos.x-5
+	# background.blit(text, textpos)
+	# screen.blit(background, (0,0))
 
 def main():
 	pygame.font.init()

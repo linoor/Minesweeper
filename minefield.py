@@ -123,8 +123,9 @@ class Minefield:
 			if b.mined:
 				b.image.fill(colors.bombhint)
 
-	def uncover_mines(self):
+	def uncover_mines(self, clicked_block):
 		for b in self.get_blocks():
-			if b.mined:
+			if b.mined and b != clicked_block:
 				b.uncover()
-		print(calls)
+			if b.mined and b == clicked_block:
+				b.uncover(exploded=True)
