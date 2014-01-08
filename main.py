@@ -38,9 +38,7 @@ def main():
 	initialize_screen()
 
 	#ustawianie planszy
-	normal = Difficulty(18*25+19, 16*25+17, 100, "normal")
-	easy = Difficulty(18*25+19, 16*25+17, 40, "easy")
-	debug = Difficulty(18*25+19, 16*25+17, 5, "debug")
+	easy = Difficulty(20, 20, 40, 25, "easy")
 
 	pygame.display.flip()
 
