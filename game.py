@@ -26,7 +26,7 @@ class Game:
 		rect = self.minefield.game_area_pos
 		size = 27
 		pos = pygame.Rect(rect)
-		pos.x = rect.right - size
+		pos.x = rect.right - 20
 		pos.y -= (10 + size)
 		self.counter = Counter(self.minefield.difficulty.mines_number, pos)
 
