@@ -13,8 +13,7 @@ class Game:
 		self.clock = 0
 		self.minefield = minefield
 		self.clickable = True
-		self.clock = self.init_clock()
-		self.clock.show_clock()
+		self.clock = None
 		self.first_click = True
 
 		#ustawienia licznika
@@ -32,8 +31,13 @@ class Game:
 		self.counter = Counter(self.minefield.difficulty.mines_number, pos)
 
 	def init_clock(self):
-		rect = globals.screen.get_rect()
-		pos = rect.left + 70, rect.top + 28
+		rect = self.minefield.game_area_pos
+		size = 27
+		# pozycja zegara
+		pos = pygame.Rect(rect)
+		pos.x = rect.left
+		pos.y -= (10 + size)
+		# ustawianie sprite'a zegara
 		return Clock(pos)
 
 	def find_collide_rect(self, pos):
@@ -125,11 +129,13 @@ class Game:
 		# wylaczenie zegara
 		self.clock.stop_clock()
 	def new_game(self):
+		self.minefield.draw()
+		if not self.clock:
+			self.clock = self.init_clock()
 		#czyszczenie
 		self.clock.clear_clock()
 		self.clock.stop_clock()
 		self.clock.show_clock()
-		self.minefield.draw()
 		self.init_counter()
 		self.counter.clear_counter()
 		self.counter.show_counter()

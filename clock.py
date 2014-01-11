@@ -8,9 +8,14 @@ class Clock:
 		self.pos = pos	
 		self.running = True
 	def show_clock(self):
+		ikona_zegara = pygame.image.load('ikonki/zegarek.png')
 		clock_font = pygame.font.Font(globals.counter_and_clock_font, 27)
 		text = clock_font.render(str(self.time).zfill(2), 1, colors.napisyColor)
-		globals.background.blit(text, self.pos)
+		globals.background.blit(ikona_zegara, self.pos)
+		pos2 = pygame.Rect(self.pos)
+		pos2.x += 25
+		pos2.y -= 2
+		globals.background.blit(text, pos2)
 	def update(self):
 		# jesli gra sie zakonczyla, zatrzymaj zegar
 		if not self.running:
