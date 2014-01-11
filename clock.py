@@ -8,7 +8,7 @@ class Clock:
 		self.pos = pos	
 		self.running = True
 	def show_clock(self):
-		clock_font = pygame.font.Font(globals.counter_and_clock_font, 36)
+		clock_font = pygame.font.Font(globals.counter_and_clock_font, 27)
 		text = clock_font.render(str(self.time).zfill(2), 1, colors.napisyColor)
 		globals.background.blit(text, self.pos)
 	def update(self):

@@ -9,7 +9,7 @@ class Counter:
 		self.show_counter()
 
 	def show_counter(self):
-		counter_font = pygame.font.Font(globals.counter_and_clock_font, 36)
+		counter_font = pygame.font.Font(globals.counter_and_clock_font, 27)
 		text = counter_font.render(str(self.mines).zfill(2), 1, colors.napisyColor)
 		globals.background.blit(text, self.pos)
 
