@@ -19,15 +19,16 @@ class Game:
 
 		#ustawienia licznika
 		self.counter = None
-		self.init_counter()
 
 		#napis wygranej/przegranej
 		self.text = None
 
 	def init_counter(self):
-		rect = globals.screen.get_rect()
-		size = 36
-		pos = rect.right - 70-size, rect.top + 28
+		rect = self.minefield.game_area_pos
+		size = 27
+		pos = pygame.Rect(rect)
+		pos.x = rect.right - size
+		pos.y -= (10 + size)
 		self.counter = Counter(self.minefield.difficulty.mines_number, pos)
 
 	def init_clock(self):
@@ -128,9 +129,10 @@ class Game:
 		self.clock.clear_clock()
 		self.clock.stop_clock()
 		self.clock.show_clock()
+		self.minefield.draw()
+		self.init_counter()
 		self.counter.clear_counter()
 		self.counter.show_counter()
-		self.minefield.draw()
 		self.clear_win_lose()
 		if DEBUG:
 			self.minefield.debug()
