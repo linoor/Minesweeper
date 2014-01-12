@@ -15,11 +15,10 @@ def start_new_game(difficulty):
 def initialize_screen():
 	#menu
 	background.fill(colors.backgroundColor)
-	font = pygame.font.Font(globals.font, 36)
-	text = font.render("SAPER!", 1, colors.napisyColor)
-	textpos = text.get_rect()
+	saper_logo = pygame.image.load('ikonki/saper_logo.png')
+	textpos = saper_logo.get_rect()
 	textpos.centerx = background.get_rect().centerx
-	background.blit(text, textpos)
+	background.blit(saper_logo, textpos)
 
 def main():
 	pygame.font.init()
