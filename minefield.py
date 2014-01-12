@@ -125,6 +125,29 @@ class Minefield:
 		self.game_area_pos.centerx = globals.background.get_rect().centerx
 		self.game_area_pos.bottom = globals.background.get_rect().height - 30
 
+		#shadow
+		left_bottom = self.game_area_pos.bottomleft
+		bottom_right = self.game_area_pos.bottomright
+		top_right = self.game_area_pos.topright
+		screen_right = (globals.screen.get_rect().right, top_right[1] + 25)
+		screen_rightbottom = globals.screen.get_rect().bottomright
+		screen_leftbottom = (left_bottom[0] + 25, globals.screen.get_rect().bottom)
+
+		print(left_bottom)
+		print(bottom_right)
+		print(top_right)
+		print(screen_right)
+
+
+		pygame.draw.polygon(background, colors.shadowColor, [
+			left_bottom,
+			bottom_right,
+			top_right,
+			screen_right,
+			screen_rightbottom,
+			screen_leftbottom,
+			left_bottom])
+
 	def debug(self):
 		for b in self.get_blocks():
 			if b.mined:
