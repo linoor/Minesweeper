@@ -15,6 +15,14 @@ class Clock:
 		pos2 = pygame.Rect(self.pos)
 		pos2.x += 25
 		pos2.y -= 2
+		# shadow
+		clock_shadow = clock_font.render(str(self.time).zfill(2), 1, colors.shadowColor)
+		shadow_pos = pygame.Rect(pos2)
+		shadow_pos.x += 2
+		shadow_pos.y += 2
+
+		
+		globals.background.blit(clock_shadow, shadow_pos)
 		globals.background.blit(text, pos2)
 	def update(self):
 		# jesli gra sie zakonczyla, zatrzymaj zegar
