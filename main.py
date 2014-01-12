@@ -18,6 +18,7 @@ def initialize_screen():
 	saper_logo = pygame.image.load('ikonki/saper_logo.png')
 	textpos = saper_logo.get_rect()
 	textpos.centerx = background.get_rect().centerx
+	textpos.y += 30
 	background.blit(saper_logo, textpos)
 
 def main():
