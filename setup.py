@@ -6,7 +6,7 @@ base = None
 if sys.platform == 'win32':
 	base = "WIN32GUI"
 
-includefiles = ['Block.pyw', 'clock.pyw', 'colors.pyw', 'counter.pyw', 'difficulty.pyw', 'game.pyw', 'globals.pyw',
+includefiles = ['Block.py', 'clock.py', 'colors.py', 'counter.py', 'difficulty.py', 'game.py', 'globals.py',
 'kenzo.otf',
 'ikonki/']
 excludes = ['Tkinter']
@@ -19,5 +19,5 @@ setup(
     author = 'Michal Pomaranski',
     author_email = 'michal.pomaranski@gmail.com',
     options = {'build_exe': {'excludes':excludes,'packages':packages,'include_files':includefiles}}, 
-    executables = [Executable('main.pyw', base = base)]
+    executables = [Executable('main.py', base = base)]
 )
