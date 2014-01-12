@@ -47,14 +47,12 @@ def main():
 
 			if event.type == MOUSEBUTTONDOWN: #handler poruszania myszka
 				if event.button == 1:
-					print(event.pos)
 					# sprawdzamy czy gracz kliknal logo
 					if logo_pos.collidepoint(event.pos):
 						game = start_new_game(easy)
 
 					game.left_click(event.pos)
 				if event.button == 3:
-					print(event.pos)
 					game.right_click(event.pos)
 			if event.type == UPDATECLOCKEVENT:
 					game.update_clock()

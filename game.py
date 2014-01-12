@@ -62,8 +62,8 @@ class Game:
 						self.minefield.ripple_effect(b)
 					else:
 						b.uncover()
-				print(b.rect)
-				print(pos)
+				#print(b.rect)
+				#print(pos)
 
 			if self.is_game_over():
 				self.end_game(b)
@@ -86,8 +86,8 @@ class Game:
 						self.counter.update()
 					elif b.question:
 						b.cover()
-				print(b.rect)
-				print(pos)
+				#print(b.rect)
+				#print(pos)
 
 			if self.is_game_over():
 				self.end_game()

@@ -65,7 +65,8 @@ class Minefield:
 					if blocks[current_row][current_column].covered:
 						self.ripple_effect(blocks[current_row][current_column])
 				except IndexError as e:
-					print(current_row, current_column)
+					#print(current_row, current_column)
+					pass
 		return
 
 	def find(self, elem):
