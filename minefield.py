@@ -123,7 +123,7 @@ class Minefield:
 		self.game_area.fill(colors.game_area_color)
 		self.game_area_pos = self.game_area.get_rect()
 		self.game_area_pos.centerx = globals.background.get_rect().centerx
-		self.game_area_pos.bottom = globals.background.get_rect().height - 10
+		self.game_area_pos.bottom = globals.background.get_rect().height - 30
 
 	def debug(self):
 		for b in self.get_blocks():

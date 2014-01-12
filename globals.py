@@ -1,7 +1,7 @@
 import pygame
 import colors
 
-screen_height = 650
+screen_height = 700
 screen_width = 550
 # ustawianie wielkosci okna
 global screen
