@@ -15,11 +15,7 @@ def start_new_game(difficulty):
 def initialize_screen():
 	#menu
 	background.fill(colors.backgroundColor)
-	saper_logo = pygame.image.load('ikonki/saper_logo.png')
-	textpos = saper_logo.get_rect()
-	textpos.centerx = background.get_rect().centerx
-	textpos.y += 30
-	background.blit(saper_logo, textpos)
+	background.blit(saper_logo, logo_pos)
 
 def main():
 	pygame.font.init()
@@ -52,6 +48,10 @@ def main():
 			if event.type == MOUSEBUTTONDOWN: #handler poruszania myszka
 				if event.button == 1:
 					print(event.pos)
+					# sprawdzamy czy gracz kliknal logo
+					if logo_pos.collidepoint(event.pos):
+						game = start_new_game(easy)
+
 					game.left_click(event.pos)
 				if event.button == 3:
 					print(event.pos)

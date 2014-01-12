@@ -16,5 +16,10 @@ global background
 background = pygame.Surface(screen.get_size())
 background = background.convert()
 
+saper_logo = pygame.image.load('ikonki/saper_logo.png')
+logo_pos = saper_logo.get_rect()
+logo_pos.centerx = background.get_rect().centerx
+logo_pos.y += 30
+
 # event odliczania czasu
 UPDATECLOCKEVENT = pygame.USEREVENT + 1
