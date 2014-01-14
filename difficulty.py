@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+""" klasa odzwierciedlająca poziom trudności. Zawiera takie dane jak: wielkość planszy, ilość min na planszy, wielkość pola """
+
+
 class Difficulty:
 
     def __init__(self, width, height, mines_number, field_size, name):

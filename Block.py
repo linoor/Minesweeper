@@ -1,4 +1,5 @@
-"""klasa odwzwierciedlajaca pole"""
+# -*- coding: utf-8 -*-
+"""klasa odwzwierciedląjaca jedno konkretne pole na planszy"""
 
 import pygame
 import colors
@@ -8,6 +9,7 @@ from globals import *
 class Block(pygame.sprite.Sprite):
 
     def __init__(self, posx, posy, size, i, j):
+        """ inicjalizacja stanow pola, ustawianie tła itd."""
         pygame.sprite.Sprite.__init__(self)
         self.size = size
         self.covered = True
@@ -22,10 +24,12 @@ class Block(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
     def init_image(self):
+        """ inicjalizacja tła"""
         self.image = pygame.image.load('ikonki/aktywne.png')
         self.image = self.image.convert()
 
     def uncover(self, exploded=False):
+        """ metoda obsługująca kliknięcie lewym przyciskiem myszy na pole"""
         if self.mined and not exploded:
             self.image = pygame.image.load('ikonki/mina.png')
         elif self.mined and exploded:
@@ -40,20 +44,24 @@ class Block(pygame.sprite.Sprite):
         self.covered = False
 
     def flag(self):
+        """ metoda ustawiająca flagę jako tło """
         self.image = pygame.image.load('ikonki/flag.png')
         self.flagged = True
 
     def question(self):
+        """ metoda ustawiająca pytajnik jako tło """
         self.flagged = False
         self.question = True
         self.image = pygame.image.load('ikonki/mark.png')
 
     def cover(self):
+        """ metoda zasłaniająca pole"""
         self.flagged = False
         self.question = False
         self.image = pygame.image.load('ikonki/aktywne.png')
 
     def mine(self):
+    	""" metoda ustawiająca bombę na polu """
         self.mined = True
 
 

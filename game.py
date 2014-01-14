@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+""" główna klasa obsługująca całą grę"""
+
 from Block import Block
 from counter import Counter
 import pygame
@@ -25,6 +28,7 @@ class Game:
         self.text = None
 
     def init_counter(self):
+    	""" inicjalizacja licznika"""
         rect = self.minefield.game_area_pos
         size = 27
         pos = pygame.Rect(rect)
@@ -33,6 +37,7 @@ class Game:
         self.counter = Counter(self.minefield.difficulty.mines_number, pos)
 
     def init_clock(self):
+    	""" inicjalizacja zegara"""
         rect = self.minefield.game_area_pos
         size = 27
         # pozycja zegara
@@ -43,11 +48,13 @@ class Game:
         return Clock(pos)
 
     def find_collide_rect(self, pos):
+    	""" metoda sprawdzająca które pole zostało kliknięte """
         for b in self.minefield.get_blocks():
             if b.rect.collidepoint(pos):
                 return b
 
     def left_click(self, pos):
+    	""" metoda obsługująca lewe kliknięcie myszki """
         if self.clickable:
 
             # znajdujemy kliniete pole
@@ -73,6 +80,7 @@ class Game:
             self.minefield.update()
 
     def right_click(self, pos):
+    	""" metoda obsługująca prawe kliknięcie myszki """
         if self.clickable:
             b = self.find_collide_rect(pos)
             if b:
@@ -97,6 +105,7 @@ class Game:
             self.minefield.update()
 
     def is_game_over(self):
+    	""" metoda sprawdzająca czy gra została zakonczona (wygrana lub przegrana gracza)"""
         # jesli miny jeszcze nie sa ustawione
         if not self.minefield.are_mines_set:
             return False
@@ -114,6 +123,7 @@ class Game:
         return False
 
     def end_game(self, clicked_block):
+    	""" metoda koncząca grę (pokazanie wszystkich min, pokazanie napisu wygranej/przegranej, zatrzymanie zegara)"""
         # wygrana
         if self.check_win():
             self.text = pygame.image.load('ikonki/won.png')
@@ -133,10 +143,11 @@ class Game:
         self.clock.stop_clock()
 
     def new_game(self):
+    	""" Metoda rozpoczynająca nową grę. """
         self.minefield.draw()
         if not self.clock:
             self.clock = self.init_clock()
-        # czyszczenie
+        # czyszczenie grafik
         self.clock.clear_clock()
         self.clock.stop_clock()
         self.clock.show_clock()
@@ -148,6 +159,7 @@ class Game:
             self.minefield.debug()
 
     def check_win(self):
+    	""" Metoda sprawdzająca czy gracz wygrał """
         # jesli trafimy na mine - przegrana
         if any(b.mined and not b.covered for b in self.minefield.get_blocks()):
             return False
@@ -158,6 +170,7 @@ class Game:
         self.clock.update()
 
     def clear_win_lose(self):
+    	""" metoda usuwająca napis wygranej/przegranej """
         tmp = pygame.Surface((110, 30))
         tmp.fill(colors.backgroundColor)
         tmp_pos = tmp.get_rect()

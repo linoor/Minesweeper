@@ -1,3 +1,4 @@
+""" Skrypt tworzący plik .exe """
 import sys
 
 from cx_Freeze import setup, Executable
@@ -15,7 +16,7 @@ packages = []
 
 setup(
     name='Saper',
-    version='1.0.0',
+    version='1.1.0',
     description='Saper napisany w PyGame',
     author='Michal Pomaranski',
     author_email='michal.pomaranski@gmail.com',

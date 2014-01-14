@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
+""" moduł ze wszystkimi kolorami użytymi w programie """
 import pygame
 # kolory
 whiteColor = pygame.Color(250, 250, 250)
 redColor = pygame.Color(255, 0, 0)
 game_area_color = pygame.Color("#d9d9d9")
 orangeColor = pygame.Color(255, 201, 0)
-# uncoveredColor = pygame.Color(195, 250, 236)
 uncoveredColor = pygame.Color(0, 147, 191)
 coveredColor = pygame.Color(41, 156, 0)
 questionColor = pygame.Color(0, 255, 153)

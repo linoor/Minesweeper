@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+""" Moduł zawierający globalne zmienne używane przez wszystkie klasy """
 import pygame
 import colors
 

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+""" klasas obsługująca zegarek """
+
 import globals
 import colors
 import pygame
@@ -6,20 +9,23 @@ import pygame
 class Clock:
 
     def __init__(self, pos):
+    	""" początkowe wartości"""
         self.time = 0
         self.pos = pos
         self.running = True
 
     def show_clock(self):
+    	""" metoda wyświetlająca zegar """
         ikona_zegara = pygame.image.load('ikonki/zegarek.png')
         clock_font = pygame.font.Font(globals.counter_and_clock_font, 27)
         text = clock_font.render(
             str(self.time).zfill(2), 1, colors.napisyColor)
         globals.background.blit(ikona_zegara, self.pos)
+        # ustawianie pozycji
         pos2 = pygame.Rect(self.pos)
         pos2.x += 25
         pos2.y -= 2
-        # shadow
+        # ustawianie cienia
         clock_shadow = clock_font.render(
             str(self.time).zfill(2), 1, colors.shadowColor)
         shadow_pos = pygame.Rect(pos2)
@@ -30,6 +36,7 @@ class Clock:
         globals.background.blit(text, pos2)
 
     def update(self):
+    	""" metoda zwiększająca czas """
         # jesli gra sie zakonczyla, zatrzymaj zegar
         if not self.running:
             return
@@ -38,15 +45,18 @@ class Clock:
         self.show_clock()
 
     def clear_clock(self):
+    	""" metoda usuwająca zegar """
         tmp = pygame.Surface((3 * 36 + 2, 30))
         tmp.fill(colors.backgroundColor)
         globals.background.blit(tmp, self.pos)
 
     def start_clock(self):
+    	""" metoda rozpoczynająca odliczanie zegara"""
         pygame.time.set_timer(globals.UPDATECLOCKEVENT, 1000)
         self.running = True
 
     def stop_clock(self):
+    	""" metoda zatrzymująca odliczanie zegara """
         self.running = False
 
 

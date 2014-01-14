@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+""" Jedna z głównych klas obsługująca planszę """
+
 import pygame
 import colors
 from Block import *
@@ -23,9 +26,11 @@ class Minefield:
         self.columns = 0
 
     def get_blocks(self):
+    	""" Zwraca jednowymiarową tablicę wszystkich pól """
         return list(itertools.chain.from_iterable(self.blocks))
 
     def set_mines(self, block):
+    	""" Losuje pola, które mają być zaminowane oraz ustawia na nich miny """
         random.seed()
         for _ in range(self.difficulty.mines_number):
             blocks = self.get_blocks()
@@ -43,12 +48,15 @@ class Minefield:
                     self.set_mines_around(i, j)
 
     def set_mines_around(self, i, j):
+    	""" Metoda pomocnicza sprawdzająca ile min jest ustawionych dookoła każdego pola """
+
         for n in range(i - 1, i + 2):
             for m in range(j - 1, j + 2):
                 if n < self.rows and m < self.columns and n >= 0 and m >= 0 and self.blocks[n][m]:
                     self.blocks[n][m].mines_surrounding += 1
 
     def ripple_effect(self, block):
+    	""" Metoda odkrywa pola rekurencyjnie dopóki natrafia na pola nieotoczone minami """
         if not block.covered:
             return
         if block.mined or block.flagged or block.question:
@@ -76,6 +84,7 @@ class Minefield:
         return
 
     def find(self, elem):
+    	""" metoda znajdująca obiekt danego pola"""
         for row, i in enumerate(self.blocks):
             try:
                 column = i.index(elem)
@@ -85,16 +94,19 @@ class Minefield:
         return -1
 
     def draw(self):
+    	""" metoda wyświetlająca planszę """
         self.init_game_area()
         self.init_blocks()
         self.update()
 
     def update(self):
+    	""" metoda wyświetlająca planszę po kliknięciu myszki """
         for b in self.get_blocks():
             self.game_area.blit(b.image, (b.posx, b.posy))
         globals.background.blit(self.game_area, (self.game_area_pos))
 
     def init_blocks(self):
+    	""" inicjalizacja planszy """
         size = 25
         padding = 1
         posx, posy = padding, padding
@@ -117,12 +129,14 @@ class Minefield:
         self.columns = len(self.blocks[0])
 
     def create_block(self, posx, posy, size, i, j):
+    	""" Metoda tworzy nowe pole """
         block = Block(posx, posy, size, i, j)
         offset = self.game_area_pos.topleft
         block.rect.topleft = (posx + offset[0], posy + offset[1])
         return block
 
     def init_game_area(self):
+    	""" Metoda tworząca planszę """
         size = self.difficulty.width, self.difficulty.height
         self.game_area = pygame.Surface(size)
         self.game_area = self.game_area.convert()
@@ -131,7 +145,7 @@ class Minefield:
         self.game_area_pos.centerx = globals.background.get_rect().centerx
         self.game_area_pos.bottom = globals.background.get_rect().height - 30
 
-        # shadow
+        # ustawianie cienia planszy
         left_bottom = self.game_area_pos.bottomleft
         bottom_right = self.game_area_pos.bottomright
         top_right = self.game_area_pos.topright
@@ -155,11 +169,13 @@ class Minefield:
             left_bottom])
 
     def debug(self):
+    	""" Metoda która pokazuje gdzie ukryte są miny (tylko dla trybu debugowania) """
         for b in self.get_blocks():
             if b.mined:
                 b.image.fill(colors.bombhint)
 
     def uncover_mines(self, clicked_block):
+    	""" Metoda odsłaniająca wszystkie pola """
         for b in self.get_blocks():
             if b.mined and b != clicked_block:
                 b.uncover()

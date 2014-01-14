@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+""" klasas obsługująca licznik pozostałych nieznalezionych jeszcze min"""
 import globals
 import colors
 import pygame
@@ -11,12 +13,13 @@ class Counter:
         self.show_counter()
 
     def show_counter(self):
+        """ metoda wyświetlająca licznik """
         ikona_bomby = pygame.image.load('ikonki/bomba.png')
         counter_font = pygame.font.Font(globals.counter_and_clock_font, 27)
         text = counter_font.render(
             str(self.mines).zfill(2), 1, colors.napisyColor)
 
-        # shadow
+        # ustawianie cienia
         counter_shadow = counter_font.render(
             str(self.mines).zfill(2), 1, colors.shadowColor)
         shadow_pos = pygame.Rect(self.pos)
@@ -32,6 +35,7 @@ class Counter:
         globals.background.blit(ikona_bomby, pos2)
 
     def update(self):
+    	""" metoda zmieniająca licznik """
         # jesli gra sie zakonczyla, zatrzymaj zegar
         if self.mines < 0:
             return
@@ -39,6 +43,7 @@ class Counter:
         self.show_counter()
 
     def clear_counter(self):
+    	""" metoda usuwająca licznik """
         tmp = pygame.Surface((3 * 36 + 2, 30))
         tmp.fill(colors.backgroundColor)
         globals.background.blit(tmp, self.pos)
