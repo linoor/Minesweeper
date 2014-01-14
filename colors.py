@@ -1,5 +1,5 @@
 import pygame
-# kolory 
+# kolory
 whiteColor = pygame.Color(250, 250, 250)
 redColor = pygame.Color(255, 0, 0)
 game_area_color = pygame.Color("#d9d9d9")
@@ -13,3 +13,10 @@ bombhint = pygame.Color(250, 192, 106)
 backgroundColor = pygame.Color("#33A8E0")
 napisyColor = pygame.Color("#FFFFFF")
 shadowColor = pygame.Color("#298bcb")
+
+
+def main():
+    pass
+
+if __name__ == "__main__":
+    main()
