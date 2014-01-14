@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ Skrypt tworzący plik .exe """
 import sys
 
