@@ -14,7 +14,7 @@ class Counter:
 
     def show_counter(self):
         """ metoda wyświetlająca licznik """
-        ikona_bomby = pygame.image.load('ikonki/bomba.png')
+        ikona_bomby = pygame.image.load('bomba.png')
         counter_font = pygame.font.Font(globals.counter_and_clock_font, 27)
         text = counter_font.render(
             str(self.mines).zfill(2), 1, colors.napisyColor)

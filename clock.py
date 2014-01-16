@@ -16,7 +16,7 @@ class Clock:
 
     def show_clock(self):
     	""" metoda wyświetlająca zegar """
-        ikona_zegara = pygame.image.load('ikonki/zegarek.png')
+        ikona_zegara = pygame.image.load('zegarek.png')
         clock_font = pygame.font.Font(globals.counter_and_clock_font, 27)
         text = clock_font.render(
             str(self.time).zfill(2), 1, colors.napisyColor)

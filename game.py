@@ -126,10 +126,10 @@ class Game:
     	""" metoda koncząca grę (pokazanie wszystkich min, pokazanie napisu wygranej/przegranej, zatrzymanie zegara)"""
         # wygrana
         if self.check_win():
-            self.text = pygame.image.load('ikonki/won.png')
+            self.text = pygame.image.load('won.png')
         # przegrana
         else:
-            self.text = pygame.image.load('ikonki/lose.png')
+            self.text = pygame.image.load('lose.png')
         # odkrywanie wszystkich min
         self.minefield.uncover_mines(clicked_block)
         # umiejscowienie napisu
