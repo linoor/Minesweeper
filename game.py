@@ -4,6 +4,7 @@
 from Block import Block
 from counter import Counter
 import pygame
+import os
 import globals
 from clock import *
 import colors
@@ -126,10 +127,10 @@ class Game:
     	""" metoda koncząca grę (pokazanie wszystkich min, pokazanie napisu wygranej/przegranej, zatrzymanie zegara)"""
         # wygrana
         if self.check_win():
-            self.text = pygame.image.load('won.png')
+            self.text = pygame.image.load(os.path.join('ikonki', 'won.png'))
         # przegrana
         else:
-            self.text = pygame.image.load('lose.png')
+            self.text = pygame.image.load(os.path.join('ikonki', 'lose.png'))
         # odkrywanie wszystkich min
         self.minefield.uncover_mines(clicked_block)
         # umiejscowienie napisu

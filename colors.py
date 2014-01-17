@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """ moduł ze wszystkimi kolorami użytymi w programie """
 import pygame
+import os
 # kolory
 whiteColor = pygame.Color(250, 250, 250)
 redColor = pygame.Color(255, 0, 0)

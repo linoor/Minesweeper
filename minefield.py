@@ -2,6 +2,7 @@
 """ Jedna z głównych klas obsługująca planszę """
 
 import pygame
+import os
 import colors
 from Block import *
 import random
