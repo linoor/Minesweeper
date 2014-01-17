@@ -10,7 +10,6 @@ if sys.platform == 'win32':
 
 includefiles = [
     'Block.py', 'clock.py', 'colors.py', 'counter.py', 'difficulty.py', 'game.py', 'globals.py',
-    'kenzo.otf',
     'ikonki/']
 excludes = ['Tkinter']
 packages = []
