@@ -5,7 +5,7 @@ import os
 # kolory
 whiteColor = pygame.Color(250, 250, 250)
 redColor = pygame.Color(255, 0, 0)
-game_area_color = pygame.Color("#d9d9d9")
+game_area_color = pygame.Color("#c4c4c4")
 orangeColor = pygame.Color(255, 201, 0)
 uncoveredColor = pygame.Color(0, 147, 191)
 coveredColor = pygame.Color(41, 156, 0)
