@@ -33,6 +33,10 @@ def main():
     pygame.init()
     pygame.display.set_caption('Saper')
 
+    # ustawianie ikony
+    icon = pygame.image.load(os.path.join('ikonki', 'icon_saper.ico'))
+    pygame.display.set_icon(icon)
+
     initialize_screen()
 
     # ustawianie planszy
@@ -64,7 +68,7 @@ def main():
             	# jeżeli lewe kliknięcie myszki
                 if event.button == 1:
                     # sprawdzamy czy gracz kliknął napis SAPER
-                    if logo_pos.collidepoint(event.pos):
+                    if logo_pos.collidepoint(event.pos) or refresh_pos.collidepoint(event.pos):
                         game = start_new_game(easy)
 
                     # obsługa kliknięcia na pola
