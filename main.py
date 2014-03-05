@@ -24,6 +24,7 @@ def initialize_screen():
     # menu
     background.fill(colors.backgroundColor)
     background.blit(saper_logo, logo_pos)
+    background.blit(refresh, refresh_pos)
 
 
 def main():
