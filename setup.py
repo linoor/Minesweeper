@@ -9,6 +9,7 @@ def isSystemDLL(pathname):
 py2exe.build_exe.isSystemDLL = isSystemDLL
 
 sys.argv.append('py2exe')
+sys.argv.append('--icon icon_saper.ico')
 
 setup(
     options = {'py2exe': {'bundle_files': 1, 'compressed': True}},
