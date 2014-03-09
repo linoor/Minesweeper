@@ -1,26 +1,17 @@
-# -*- coding: utf-8 -*-
-""" Skrypt tworzący plik .exe """
-import sys
+from distutils.core import setup
+import py2exe, sys, os
 
-from cx_Freeze import setup, Executable
+origIsSystemDLL = py2exe.build_exe.isSystemDLL
+def isSystemDLL(pathname):
+       if os.path.basename(pathname).lower() in ["sdl_ttf.dll"]:
+               return 0
+       return origIsSystemDLL(pathname)
+py2exe.build_exe.isSystemDLL = isSystemDLL
 
-base = None
-if sys.platform == 'win32':
-    base = "WIN32GUI"
-
-includefiles = [
-    'Block.py', 'clock.py', 'colors.py', 'counter.py', 'difficulty.py', 'game.py', 'globals.py',
-    'ikonki/']
-excludes = ['Tkinter']
-packages = []
+sys.argv.append('py2exe')
 
 setup(
-    name='Saper',
-    version='1.1.0',
-    description='Saper napisany w PyGame',
-    author='Michal Pomaranski',
-    author_email='michal.pomaranski@gmail.com',
-    options={'build_exe': {'excludes': excludes,
-                           'packages': packages, 'include_files': includefiles}},
-    executables=[Executable('main.py', base=base)]
+    options = {'py2exe': {'bundle_files': 1, 'compressed': True}},
+    windows = [{'script': "main.py"}],
+    zipfile = None,
 )

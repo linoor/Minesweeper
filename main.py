@@ -31,10 +31,8 @@ def main():
     """ główna funkcja programu """
     pygame.font.init()
     pygame.init()
-    pygame.display.set_caption('Saper')
 
     # ustawianie ikony
-    icon = pygame.image.load(os.path.join('ikonki', 'icon_saper.ico'))
     pygame.display.set_icon(icon)
 
     initialize_screen()
