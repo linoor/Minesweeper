@@ -10,7 +10,16 @@ py2exe.build_exe.isSystemDLL = isSystemDLL
 
 sys.argv.append('py2exe')
 
+image_directory = "C:\Users\Linoor\Desktop\Minesweeper\ikonki\\"
+Mydata_files = []
+for files in os.listdir(image_directory):
+    f1 = image_directory + files
+    if os.path.isfile(f1): # skip directories
+        f2 = 'ikonki', [f1]
+        Mydata_files.append(f2)
+
 setup(
+    data_files = Mydata_files,
     options = {'py2exe': {'bundle_files': 1, 'compressed': True}},
     windows = [{'script': "main.py",
     'icon_resources': [(1, os.path.join('ikonki', 'icon_saper.ico'))]
