@@ -5,6 +5,7 @@ import globals
 import colors
 import pygame
 import os
+import inspect
 
 
 class Clock:
@@ -13,7 +14,7 @@ class Clock:
     	""" początkowe wartości"""
         self.time = 0
         self.pos = pos
-        self.running = True
+        self.running = False
 
     def show_clock(self):
     	""" metoda wyświetlająca zegar """

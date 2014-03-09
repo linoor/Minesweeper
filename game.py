@@ -61,20 +61,18 @@ class Game:
             # znajdujemy kliniete pole
             b = self.find_collide_rect(pos)
 
-            # jesli pierwsze klikniecie, to rozpoczynamy odliczenie zegara
-            if self.first_click:
-                self.first_click = False
-                self.minefield.set_mines(b)
-                self.clock.start_clock()
-
             if b:
+                 # jesli pierwsze klikniecie, to rozpoczynamy odliczenie zegara
+                if self.first_click:
+                    self.first_click = False
+                    self.minefield.set_mines(b)
+                    self.clock.start_clock()
+
                 if b.covered and not b.flagged and not b.question:
                     if b.mines_surrounding == 0:
                         self.minefield.ripple_effect(b)
                     else:
                         b.uncover()
-                # print(b.rect)
-                # print(pos)
 
             if self.is_game_over():
                 self.end_game(b)
@@ -156,8 +154,6 @@ class Game:
         self.counter.clear_counter()
         self.counter.show_counter()
         self.clear_win_lose()
-        if DEBUG:
-            self.minefield.debug()
 
     def check_win(self):
     	""" Metoda sprawdzająca czy gracz wygrał """
