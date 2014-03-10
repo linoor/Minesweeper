@@ -7,14 +7,15 @@ import colors
 screen_height = 700
 screen_width = 615
 
-# ustawienia ikonki
-icon_path = os.path.join('ikonki', 'icon_saper.png')
-icon = pygame.image.load(icon_path)
-os.path.join('ikonki', 'icon_saper.png')
 
 # ustawianie wielkosci okna
 global screen
 screen = pygame.display.set_mode([screen_width, screen_height])
+
+# ustawienia ikonki
+icon_path = os.path.join('ikonki', 'icon_saper.png')
+icon = pygame.image.load(icon_path).convert_alpha()
+os.path.join('ikonki', 'icon_saper.png')
 
 # czcionka
 counter_and_clock_font = os.path.join('ikonki', "Kenzo.otf")

@@ -19,6 +19,7 @@ for files in os.listdir(image_directory):
         Mydata_files.append(f2)
 
 setup(
+    icon_file="ikonki/icon_saper.ico",
     data_files = Mydata_files,
     options = {'py2exe': {'bundle_files': 1, 'compressed': True}},
     windows = [{'script': "main.py",

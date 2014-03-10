@@ -34,7 +34,7 @@ def main():
     pygame.display.set_caption('Saper')
 
     # ustawianie ikony
-    pygame.display.set_icon(icon)
+    pygame.display.set_icon(icon.convert_alpha())
 
     initialize_screen()
 
