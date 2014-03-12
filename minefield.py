@@ -33,11 +33,16 @@ class Minefield:
     def set_mines(self, block):
     	""" Losuje pola, które mają być zaminowane oraz ustawia na nich miny """
         random.seed()
-        for _ in range(self.difficulty.mines_number):
+        mines_set = 0
+        mines_to_set = self.difficulty.mines_number
+        
+        while mines_set != mines_to_set:
             blocks = self.get_blocks()
             selected_block = blocks[random.randint(0, len(blocks) - 1)]
-            if block != selected_block:
+            if block != selected_block and not selected_block.mined:
+                mines_set += 1
                 selected_block.mine()
+                blocks.remove(block)
 
         self.set_mines_surrounding()
         self.are_mines_set = True
