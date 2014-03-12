@@ -62,6 +62,9 @@ def main():
                 # obsługa przycisku 'n'
                 if event.key == K_n:
                     game = start_new_game(easy)
+                # kody do debugowania
+                if event.key == K_q:
+                    game.turn_on_cheats()
 
             if event.type == MOUSEBUTTONDOWN:  # handler poruszania myszka
             	# jeżeli lewe kliknięcie myszki
