@@ -65,6 +65,10 @@ class Block(pygame.sprite.Sprite):
     	""" metoda ustawiająca bombę na polu """
         self.mined = True
 
+    def showMine(self):
+        if self.mined:
+            self.image = pygame.image.load(os.path.join('ikonki', 'mina.png'))
+
 
 def main():
     pass

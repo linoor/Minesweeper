@@ -100,7 +100,7 @@ class Game:
                 # print(pos)
 
             if self.is_game_over():
-                self.end_game()
+                self.end_game(b)
             self.minefield.update()
 
     def is_game_over(self):
@@ -174,6 +174,10 @@ class Game:
         tmp_pos.centerx = self.minefield.game_area_pos.centerx
         tmp_pos.y = self.minefield.game_area_pos.top - 27 - 10
         globals.background.blit(tmp, tmp_pos)
+
+    def turn_on_cheats(self):
+        for b in self.minefield.get_blocks():
+            b.showMine()
 
 
 def main():
