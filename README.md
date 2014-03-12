@@ -9,10 +9,8 @@ Saper korzysta z Pythona 2.7 oraz PyGame 1.9.1 dla Pythona 2.7
 
 http://www.pygame.org/download.shtml
 
-Wersja na windowsa stworzona za pomocą cx_Freeze (nie wymaga instalowania pythona)
+Wersja na windowsa stworzona za pomocą py2exe (nie wymaga instalowania pythona)
 
-http://cx-freeze.sourceforge.net/
+https://sourceforge.net/projects/pysaper/files/
 
-https://dl.dropboxusercontent.com/u/66203178/saper.zip
-
-Aby uruchomić wersję na Windowsa, należy otworzyć plik main.exe
+Aby uruchomić wersję na Windowsa, należy otworzyć plik saper.exe
