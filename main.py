@@ -11,6 +11,8 @@ from game import *
 from difficulty import *
 from globals import *
 
+from optparse import OptionParser
+
 
 def start_new_game(difficulty):
     """ funkcja rozpoczynająca nową grę """
@@ -28,7 +30,8 @@ def initialize_screen():
 
 
 def main():
-    """ główna funkcja programu """
+    """ główna funkcja programu """    
+
     pygame.font.init()
     pygame.init()
     pygame.display.set_caption('Saper')
@@ -87,5 +90,26 @@ def main():
 
             pygame.display.flip()
 
+def help_text():
+	help_message = """
+Saper napisany w Pygame.
+
+Autor: Michał Pomarański
+
+Aby rozpocząć nową grę należy wcisnąć klawisz 'n' na klawiaturze lub kliknąć na napis 'SAPER'.
+
+Saper korzysta z Pythona 2.7 oraz PyGame 1.9.1 dla Pythona 2.7
+
+Aby zainstalować pygame pod Linuksem:
+sudo apt-get install python-pygame
+
+Aby uruchomić grę:
+python main.py
+"""
+	print(help_message)
+
 if __name__ == '__main__':
-    main()
+	parser = OptionParser()
+	parser.print_help = help_text
+	(options, args) = parser.parse_args()
+	main()
