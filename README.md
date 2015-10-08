@@ -7,6 +7,9 @@ Aby rozpocząć nową grę należy wcisnąć klawisz 'n' na klawiaturze lub klik
 
 Saper korzysta z Pythona 2.7 oraz PyGame 1.9.1 dla Pythona 2.7
 
+Aby zainstalować pygame pod Linuksem:
+sudo apt-get install python-pygame
+
 http://www.pygame.org/download.shtml
 
 Wersja na windowsa stworzona za pomocą py2exe (nie wymaga instalowania pythona)
