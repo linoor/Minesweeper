@@ -5,6 +5,7 @@
 
 # -*- coding: utf-8 -*-
 """ Moduł zawierający globalne zmienne używane przez wszystkie klasy """
+from optparse import OptionParser
 import pygame
 import os
 import colors
@@ -45,3 +46,26 @@ refresh_pos.y += 35
 
 # event odliczania czasu
 UPDATECLOCKEVENT = pygame.USEREVENT + 1
+
+def help_text():
+    help_message = """
+Skrypt, w których przechowywane są zmienne globalne.
+
+Autor: Michał Pomarański
+
+Aby rozpocząć nową grę należy wcisnąć klawisz 'n' na klawiaturze lub kliknąć na napis 'SAPER'.
+
+Saper korzysta z Pythona 2.7 oraz PyGame 1.9.1 dla Pythona 2.7
+
+Aby zainstalować pygame pod Linuksem:
+sudo apt-get install python-pygame
+
+Aby uruchomić grę:
+python main.py
+"""
+    print(help_message)
+
+if __name__ == '__main__':
+    parser = OptionParser()
+    parser.print_help = help_text
+    (options, args) = parser.parse_args()

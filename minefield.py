@@ -197,5 +197,26 @@ class Minefield:
 def main():
     pass
 
-if __name__ == "__main__":
-    main()
+def help_text():
+    help_message = """
+Skrypt zawiera klasę, której instancja jest odpowiedzialna za tworzenie Planszy (zawiera instancje klasy Block).
+
+Autor: Michał Pomarański
+
+Aby rozpocząć nową grę należy wcisnąć klawisz 'n' na klawiaturze lub kliknąć na napis 'SAPER'.
+
+Saper korzysta z Pythona 2.7 oraz PyGame 1.9.1 dla Pythona 2.7
+
+Aby zainstalować pygame pod Linuksem:
+sudo apt-get install python-pygame
+
+Aby uruchomić grę:
+python main.py
+"""
+    print(help_message)
+
+if __name__ == '__main__':
+    parser = OptionParser()
+    parser.print_help = help_text
+    (options, args) = parser.parse_args()
+

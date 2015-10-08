@@ -5,6 +5,7 @@
 
 # -*- coding: utf-8 -*-
 """ klasas obsługująca zegarek """
+from optparse import OptionParser
 
 import globals
 import colors
@@ -70,5 +71,26 @@ class Clock:
 def main():
     pass
 
-if __name__ == "__main__":
-    main()
+def help_text():
+    help_message = """
+Jest to klasa, której instancja jest odpowiedzialna, za mierzenie czasu gry.
+
+Autor: Michał Pomarański
+
+Aby rozpocząć nową grę należy wcisnąć klawisz 'n' na klawiaturze lub kliknąć na napis 'SAPER'.
+
+Saper korzysta z Pythona 2.7 oraz PyGame 1.9.1 dla Pythona 2.7
+
+Aby zainstalować pygame pod Linuksem:
+sudo apt-get install python-pygame
+
+Aby uruchomić grę:
+python main.py
+"""
+    print(help_message)
+
+if __name__ == '__main__':
+    parser = OptionParser()
+    parser.print_help = help_text
+    (options, args) = parser.parse_args()
+

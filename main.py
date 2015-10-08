@@ -97,6 +97,8 @@ def main():
 
 def help_text():
 	help_message = """
+Jest to główny skrypt, za pomocą którego możemy uruchomić grę (python main.py).
+
 Saper napisany w Pygame.
 
 Autor: Michał Pomarański
