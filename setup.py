@@ -1,3 +1,8 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# Michał Pomarański
+# grupa nr 3
+
 from distutils.core import setup
 import py2exe, sys, os
 

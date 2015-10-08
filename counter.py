@@ -1,3 +1,8 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# Michał Pomarański
+# grupa nr 3
+
 # -*- coding: utf-8 -*-
 """ klasas obsługująca licznik pozostałych nieznalezionych jeszcze min"""
 import globals
