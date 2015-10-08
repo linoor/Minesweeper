@@ -165,11 +165,6 @@ class Minefield:
         screen_leftbottom = (
             left_bottom[0] + 25, globals.screen.get_rect().bottom)
 
-        print(left_bottom)
-        print(bottom_right)
-        print(top_right)
-        print(screen_right)
-
         pygame.draw.polygon(background, colors.shadowColor, [
             left_bottom,
             bottom_right,
