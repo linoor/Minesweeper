@@ -7,12 +7,10 @@
 
 import sys
 from pygame.locals import *
-from optparse import OptionParser
 
 from minefield import *
 from game import *
 from difficulty import *
-from globals import *
 
 
 def start_new_game(difficulty):
@@ -32,6 +30,10 @@ def initialize_screen():
 
 def main():
     """ główna funkcja programu """
+
+    if not X_is_running():
+        raise Exception("X Window System powinien być włączony, żeby móc uruchomić grę.")
+        exit()
 
     pygame.font.init()
     pygame.init()
