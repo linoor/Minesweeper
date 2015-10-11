@@ -108,6 +108,8 @@ Saper korzysta z Pythona 2.7 oraz PyGame 1.9.1 dla Pythona 2.7
 Aby zainstalować pygame pod Linuksem:
 sudo apt-get install python-pygame
 
+Aby gra działała X Window System powinien być włączony.
+
 Aby uruchomić grę:
 python main.py
 """
