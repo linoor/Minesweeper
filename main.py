@@ -5,18 +5,14 @@
 
 # -*- coding: utf-8 -*-
 
-import pygame
-import os
 import sys
 from pygame.locals import *
+from optparse import OptionParser
 
 from minefield import *
-from colors import *
 from game import *
 from difficulty import *
 from globals import *
-
-from optparse import OptionParser
 
 
 def start_new_game(difficulty):
@@ -35,10 +31,11 @@ def initialize_screen():
 
 
 def main():
-    """ główna funkcja programu """    
+    """ główna funkcja programu """
 
     pygame.font.init()
     pygame.init()
+
     pygame.display.set_caption('Saper')
 
     # ustawianie ikony
@@ -57,13 +54,13 @@ def main():
     # glowna petla
     while True:
         for event in pygame.event.get():
-        	# obsługa kliknięcia przycisku zamykania programu
+            # obsługa kliknięcia przycisku zamykania programu
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
             # obsługa klawiszy
             if event.type == KEYDOWN:
-            	# obsługa przycisku ESC
+                # obsługa przycisku ESC
                 if event.key == K_ESCAPE:
                     pygame.quit()
                     sys.exit()
@@ -75,7 +72,7 @@ def main():
                     game.turn_on_cheats()
 
             if event.type == MOUSEBUTTONDOWN:  # handler poruszania myszka
-            	# jeżeli lewe kliknięcie myszki
+                # jeżeli lewe kliknięcie myszki
                 if event.button == 1:
                     # sprawdzamy czy gracz kliknął napis SAPER
                     if logo_pos.collidepoint(event.pos) or refresh_pos.collidepoint(event.pos):
@@ -83,7 +80,7 @@ def main():
 
                     # obsługa kliknięcia na pola
                     game.left_click(event.pos)
-            	# obsługa prawego klikniecią myszki
+                # obsługa prawego klikniecią myszki
                 if event.button == 3:
                     game.right_click(event.pos)
             # obsługa zegara
@@ -95,8 +92,9 @@ def main():
 
             pygame.display.flip()
 
+
 def help_text():
-	help_message = """
+    help_message = """
 Jest to główny skrypt, za pomocą którego możemy uruchomić grę (python main.py).
 
 Saper napisany w Pygame.
@@ -113,10 +111,13 @@ sudo apt-get install python-pygame
 Aby uruchomić grę:
 python main.py
 """
-	print(help_message)
+    print(help_message)
+
 
 if __name__ == '__main__':
-	parser = OptionParser()
-	parser.print_help = help_text
-	(options, args) = parser.parse_args()
-	main()
+
+    parser = OptionParser()
+    parser.print_help = help_text
+    (options, args) = parser.parse_args()
+
+    main()
