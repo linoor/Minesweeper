@@ -8,11 +8,19 @@
 from optparse import OptionParser
 import pygame
 import os
-import colors
+
+def X_is_running():
+    from subprocess import Popen, PIPE
+    p = Popen(["xset", "-q"], stdout=PIPE, stderr=PIPE)
+    p.communicate()
+    return p.returncode == 0
+
+if not X_is_running():
+    raise Exception("The X Windows System should be running to play the game.")
+    exit()
 
 screen_height = 700
 screen_width = 615
-
 
 # ustawianie wielkosci okna
 global screen
@@ -69,3 +77,4 @@ if __name__ == '__main__':
     parser = OptionParser()
     parser.print_help = help_text
     (options, args) = parser.parse_args()
+

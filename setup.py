@@ -15,7 +15,7 @@ py2exe.build_exe.isSystemDLL = isSystemDLL
 
 sys.argv.append('py2exe')
 
-image_directory = "E:\Dev\Minesweeper\ikonki\\"
+image_directory = "E:\Dev\Minesweeper\ikonki\"
 Mydata_files = []
 for files in os.listdir(image_directory):
     f1 = image_directory + files
