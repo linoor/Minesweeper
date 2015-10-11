@@ -16,7 +16,7 @@ def X_is_running():
     return p.returncode == 0
 
 if not X_is_running():
-    raise Exception("The X Windows System should be running to play the game.")
+    raise Exception("X Window System powinien być włączony, żeby móc uruchomić grę.")
     exit()
 
 screen_height = 700
