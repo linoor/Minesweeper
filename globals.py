@@ -8,6 +8,8 @@
 from optparse import OptionParser
 import pygame
 import os
+import sys
+
 
 def X_is_running():
     from subprocess import Popen, PIPE
@@ -15,7 +17,12 @@ def X_is_running():
     p.communicate()
     return p.returncode == 0
 
-if X_is_running():
+is_help = len(sys.argv) > 1 \
+          and (
+              sys.argv[1] == '--h' or sys.argv[1] == '--help' or sys.argv[1] == '-h'
+          )
+
+if X_is_running() and not is_help:
     screen_height = 700
     screen_width = 615
 
