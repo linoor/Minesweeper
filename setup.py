@@ -5,6 +5,7 @@
 
 from distutils.core import setup
 import py2exe, sys, os
+from globals import ikonki_directory
 
 origIsSystemDLL = py2exe.build_exe.isSystemDLL
 def isSystemDLL(pathname):
@@ -28,7 +29,7 @@ setup(
     data_files = Mydata_files,
     options = {'py2exe': {'bundle_files': 1, 'compressed': True}},
     windows = [{'script': "main.py",
-    'icon_resources': [(1, os.path.join('ikonki', 'icon_saper.ico'))]
+    'icon_resources': [(1, os.path.join(ikonki_directory, 'icon_saper.ico'))]
 
 
 

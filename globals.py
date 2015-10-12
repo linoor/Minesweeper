@@ -22,6 +22,9 @@ is_help = len(sys.argv) > 1 \
               sys.argv[1] == '--h' or sys.argv[1] == '--help' or sys.argv[1] == '-h'
           )
 
+directory_path = os.path.dirname(os.path.abspath(__file__))
+ikonki_directory = os.path.join(directory_path, 'ikonki')
+
 if X_is_running() and not is_help:
     screen_height = 700
     screen_width = 615
@@ -31,12 +34,12 @@ if X_is_running() and not is_help:
     screen = pygame.display.set_mode([screen_width, screen_height])
 
     # ustawienia ikonki
-    icon_path = os.path.join('ikonki', 'icon_saper.png')
+    icon_path = os.path.join(ikonki_directory, 'icon_saper.png')
     icon = pygame.image.load(icon_path).convert_alpha()
-    os.path.join('ikonki', 'icon_saper.png')
+    os.path.join(ikonki_directory, 'icon_saper.png')
 
     # czcionka
-    counter_and_clock_font = os.path.join('ikonki', "Kenzo.otf")
+    counter_and_clock_font = os.path.join(ikonki_directory, "Kenzo.otf")
 
     # ustawienia tla
     global background
@@ -44,13 +47,13 @@ if X_is_running() and not is_help:
     background = background.convert()
 
     # ustawienie logo
-    saper_logo = pygame.image.load(os.path.join('ikonki', 'saper_logo.png'))
+    saper_logo = pygame.image.load(os.path.join(ikonki_directory, 'saper_logo.png'))
     logo_pos = saper_logo.get_rect()
     logo_pos.centerx = background.get_rect().centerx
     logo_pos.y += 30
 
     # ustawienie ikonki refresh
-    refresh = pygame.image.load(os.path.join('ikonki', 'refresh_saper.png'))
+    refresh = pygame.image.load(os.path.join(ikonki_directory, 'refresh_saper.png'))
     refresh_pos = refresh.get_rect()
     refresh_pos.topright = background.get_rect().topright
     refresh_pos.x -= 75
