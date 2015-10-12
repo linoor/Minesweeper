@@ -111,6 +111,11 @@ Aby gra działała X Window System powinien być włączony.
 
 Aby uruchomić grę:
 python main.py
+
+Aby wybrać poziom trudności:
+python main.py --difficulty easy
+python main.py --difficulty medium
+python main.py --difficulty hard
 """
     print(help_message)
 
