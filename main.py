@@ -47,11 +47,22 @@ def main():
 
     # ustawianie planszy
     easy = Difficulty(20, 20, 40, 25, "easy")
+    medium = Difficulty(20, 20, 60, 25, "medium")
+    hard = Difficulty(20, 20, 80, 25, "hard")
+
+    # ustawianie poziomu trudności
+    if len(sys.argv) == 3 \
+            and sys.argv[1] == '--difficulty' \
+            and sys.argv[2] in locals() \
+            and isinstance(locals()[sys.argv[2]], Difficulty):
+        difficulty = locals()[sys.argv[2]]
+    else:
+        difficulty = easy
 
     pygame.display.flip()
 
     # rozpoczynanie gry
-    game = start_new_game(easy)
+    game = start_new_game(difficulty)
 
     # glowna petla
     while True:
@@ -68,7 +79,7 @@ def main():
                     sys.exit()
                 # obsługa przycisku 'n'
                 if event.key == K_n:
-                    game = start_new_game(easy)
+                    game = start_new_game(difficulty)
                 # kody do debugowania
                 if event.key == K_q:
                     game.turn_on_cheats()
@@ -78,7 +89,7 @@ def main():
                 if event.button == 1:
                     # sprawdzamy czy gracz kliknął napis SAPER
                     if logo_pos.collidepoint(event.pos) or refresh_pos.collidepoint(event.pos):
-                        game = start_new_game(easy)
+                        game = start_new_game(difficulty)
 
                     # obsługa kliknięcia na pola
                     game.left_click(event.pos)
@@ -120,8 +131,8 @@ python main.py
 
 if __name__ == '__main__':
 
-    parser = OptionParser()
-    parser.print_help = help_text
-    (options, args) = parser.parse_args()
+    if len(sys.argv) > 1 and (sys.argv[1] == '-h' or sys.argv[1] == '--help' or sys.argv[1] == '--h'):
+        help_text()
+        exit()
 
     main()
