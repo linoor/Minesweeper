@@ -32,7 +32,7 @@ def main():
     """ główna funkcja programu """
 
     if not X_is_running():
-        raise Exception("By móc uruchomić tę grę potrzebujesz środowiska graficznego (X Window System).")
+        print("By móc uruchomić tę grę potrzebujesz środowiska graficznego (X Window System).")
         exit()
 
     pygame.font.init()
