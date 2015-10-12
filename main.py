@@ -45,24 +45,10 @@ def main():
 
     initialize_screen()
 
-    # ustawianie planszy
-    easy = Difficulty(20, 20, 40, 25, "easy")
-    medium = Difficulty(20, 20, 60, 25, "medium")
-    hard = Difficulty(20, 20, 80, 25, "hard")
-
-    # ustawianie poziomu trudności
-    if len(sys.argv) == 3 \
-            and sys.argv[1] == '--difficulty' \
-            and sys.argv[2] in locals() \
-            and isinstance(locals()[sys.argv[2]], Difficulty):
-        difficulty = locals()[sys.argv[2]]
-    else:
-        difficulty = easy
-
     pygame.display.flip()
 
     # rozpoczynanie gry
-    game = start_new_game(difficulty)
+    game = start_new_game(globals.chosen_difficulty)
 
     # glowna petla
     while True:
@@ -79,7 +65,7 @@ def main():
                     sys.exit()
                 # obsługa przycisku 'n'
                 if event.key == K_n:
-                    game = start_new_game(difficulty)
+                    game = start_new_game(globals.chosen_difficulty)
                 # kody do debugowania
                 if event.key == K_q:
                     game.turn_on_cheats()
@@ -89,7 +75,7 @@ def main():
                 if event.button == 1:
                     # sprawdzamy czy gracz kliknął napis SAPER
                     if logo_pos.collidepoint(event.pos) or refresh_pos.collidepoint(event.pos):
-                        game = start_new_game(difficulty)
+                        game = start_new_game(globals.chosen_difficulty)
 
                     # obsługa kliknięcia na pola
                     game.left_click(event.pos)

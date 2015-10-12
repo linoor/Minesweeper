@@ -9,6 +9,7 @@ from optparse import OptionParser
 import pygame
 import os
 import sys
+from difficulty import Difficulty
 
 
 def X_is_running():
@@ -25,9 +26,25 @@ is_help = len(sys.argv) > 1 \
 directory_path = os.path.dirname(os.path.abspath(__file__))
 ikonki_directory = os.path.join(directory_path, 'ikonki')
 
+
+difficulties = {
+    "easy": Difficulty(20, 20, 40, 25, "easy", 615),
+    "medium": Difficulty(30, 20, 60, 25, "medium", 815),
+    "hard": Difficulty(40, 20, 80, 25, "hard", 1115)
+}
+
+chosen_difficulty = difficulties['easy']
+
+if len(sys.argv) == 3 \
+        and sys.argv[1] == '--difficulty' \
+        and sys.argv[2] in difficulties.keys():
+    chosen_difficulty = difficulties[sys.argv[2]]
+else:
+    chosen_difficulty = difficulties["easy"]
+
 if X_is_running() and not is_help:
     screen_height = 700
-    screen_width = 615
+    screen_width = chosen_difficulty.screen_width
 
     # ustawianie wielkosci okna
     global screen
