@@ -31,6 +31,9 @@ class Block(pygame.sprite.Sprite):
         self.flagged_state = FlaggedState(self)
         self.question_state = QuestionState(self)
         self.covered_state = CoveredState(self)
+        self.mined_state = MinedState(self)
+        self.exploded_state = ExplodedState(self)
+        self.not_mined_uncovered_state = NotMinedUncoveredState(self)
         self.state = self.covered_state
 
     def init_image(self):
@@ -41,17 +44,11 @@ class Block(pygame.sprite.Sprite):
     def uncover(self, exploded=False):
         """ metoda obsługująca kliknięcie lewym przyciskiem myszy na pole"""
         if self.mined and not exploded:
-            self.image = pygame.image.load(os.path.join(ikonki_directory, 'mina.png'))
+            self.state = self.mined_state.update()
         elif self.mined and exploded:
-            self.image = pygame.image.load(os.path.join(ikonki_directory, 'mina1.png'))
+            self.state = self.exploded_state.update()
         else:
-            # jesli dookola nie ma min, nie ustawiamy cyfry "0"
-            self.image = pygame.image.load(os.path.join(ikonki_directory, 'nieaktywne.png'))
-            # ustawianie napisu na polach
-            if self.mines_surrounding != 0:
-                self.image = pygame.image.load(
-                    os.path.join(ikonki_directory, '%d.png') % self.mines_surrounding)
-        self.covered = False
+            self.state = self.not_mined_uncovered_state.update()
 
     def flag(self):
         """ metoda ustawiająca flagę jako tło """
@@ -103,6 +100,7 @@ class CoveredState(BlockState):
         self.block.question = False
         return self
 
+
 class QuestionState(BlockState):
     def __init__(self, block):
         self.block = block
@@ -112,6 +110,42 @@ class QuestionState(BlockState):
         super(QuestionState, self).update()
         self.block.flagged = False
         self.block.question = True
+        return self
+
+
+class MinedState(BlockState):
+    def __init__(self, block):
+        self.block = block
+        self.ikonka = 'mina.png'
+
+    def update(self):
+        super(MinedState, self).update()
+        self.block.covered = False
+        return self
+
+
+class ExplodedState(BlockState):
+    def __init__(self, block):
+        self.block = block
+        self.ikonka = 'exploded.png'
+
+    def update(self):
+        super(ExplodedState, self).update()
+        self.block.covered = False
+        return self
+
+
+class NotMinedUncoveredState(BlockState):
+    def __init__(self, block):
+        self.block = block
+        self.ikonka = 'nieaktywne.png'
+
+    def update(self):
+        mines_surrounding = self.block.mines_surrounding
+        if mines_surrounding != 0:
+            self.ikonka = '%d.png' % mines_surrounding
+        super(NotMinedUncoveredState, self).update()
+        self.block.covered = False
         return self
 
 def main():
