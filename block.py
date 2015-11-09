@@ -28,6 +28,11 @@ class Block(pygame.sprite.Sprite):
         self.init_image()
         self.rect = self.image.get_rect()
 
+        self.flagged_state = FlaggedState(self)
+        self.question_state = QuestionState(self)
+        self.covered_state = CoveredState(self)
+        self.state = self.covered_state
+
     def init_image(self):
         """ inicjalizacja tła"""
         self.image = pygame.image.load(os.path.join(ikonki_directory, 'aktywne.png'))
@@ -50,20 +55,15 @@ class Block(pygame.sprite.Sprite):
 
     def flag(self):
         """ metoda ustawiająca flagę jako tło """
-        self.image = pygame.image.load(os.path.join(ikonki_directory, 'flag.png'))
-        self.flagged = True
+        self.state = self.flagged_state.update()
 
     def question(self):
         """ metoda ustawiająca pytajnik jako tło """
-        self.flagged = False
-        self.question = True
-        self.image = pygame.image.load(os.path.join(ikonki_directory, 'mark.png'))
+        self.state = self.question_state.update()
 
     def cover(self):
         """ metoda zasłaniająca pole"""
-        self.flagged = False
-        self.question = False
-        self.image = pygame.image.load(os.path.join(ikonki_directory, 'aktywne.png'))
+        self.state = self.covered_state.update()
 
     def mine(self):
         """ metoda ustawiająca bombę na polu """
@@ -73,6 +73,46 @@ class Block(pygame.sprite.Sprite):
         if self.mined:
             self.image = pygame.image.load(os.path.join(ikonki_directory, 'mina.png'))
 
+
+class BlockState(object):
+    def update(self):
+        self.block.image = pygame.image.load(os.path.join(ikonki_directory, self.ikonka))
+        return self
+
+
+class FlaggedState(BlockState):
+    def __init__(self, block):
+        self.block = block
+        self.ikonka = 'flag.png'
+
+    def update(self):
+        print("updating!")
+        super(FlaggedState, self).update()
+        self.block.flagged = True
+        return self
+
+
+class CoveredState(BlockState):
+    def __init__(self, block):
+        self.block = block
+        self.ikonka = 'aktywne.png'
+
+    def update(self):
+        super(CoveredState, self).update()
+        self.block.flagged = False
+        self.block.question = False
+        return self
+
+class QuestionState(BlockState):
+    def __init__(self, block):
+        self.block = block
+        self.ikonka = 'mark.png'
+
+    def update(self):
+        super(QuestionState, self).update()
+        self.block.flagged = False
+        self.block.question = True
+        return self
 
 def main():
     pass
