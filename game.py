@@ -20,7 +20,6 @@ DEBUG = False
 
 
 class Game:
-
     def __init__(self, minefield):
         self.clock = 0
         self.minefield = minefield
@@ -38,7 +37,7 @@ class Game:
         self.text = None
 
     def init_counter(self):
-    	""" inicjalizacja licznika"""
+        """ inicjalizacja licznika"""
         rect = self.minefield.game_area_pos
         size = 27
         pos = pygame.Rect(rect)
@@ -47,7 +46,7 @@ class Game:
         self.counter = Counter(self.minefield.difficulty.mines_number, pos)
 
     def init_clock(self):
-    	""" inicjalizacja zegara"""
+        """ inicjalizacja zegara"""
         rect = self.minefield.game_area_pos
         size = 27
         # pozycja zegara
@@ -58,20 +57,20 @@ class Game:
         return Clock(pos)
 
     def find_collide_rect(self, pos):
-    	""" metoda sprawdzająca które pole zostało kliknięte """
+        """ metoda sprawdzająca które pole zostało kliknięte """
         for b in self.minefield.get_blocks():
             if b.rect.collidepoint(pos):
                 return b
 
     def left_click(self, pos):
-    	""" metoda obsługująca lewe kliknięcie myszki """
+        """ metoda obsługująca lewe kliknięcie myszki """
         if self.clickable:
 
             # znajdujemy kliniete pole
             b = self.find_collide_rect(pos)
 
             if b:
-                 # jesli pierwsze klikniecie, to rozpoczynamy odliczenie zegara
+                # jesli pierwsze klikniecie, to rozpoczynamy odliczenie zegara
                 self.left_click_state.click(b)
 
             if self.is_game_over():
@@ -79,7 +78,7 @@ class Game:
             self.minefield.update()
 
     def right_click(self, pos):
-    	""" metoda obsługująca prawe kliknięcie myszki """
+        """ metoda obsługująca prawe kliknięcie myszki """
         if self.clickable:
             b = self.find_collide_rect(pos)
             if b:
@@ -96,15 +95,15 @@ class Game:
                         self.counter.update()
                     elif b.question:
                         b.cover()
-                # print(b.rect)
-                # print(pos)
+                        # print(b.rect)
+                        # print(pos)
 
             if self.is_game_over():
                 self.end_game(b)
             self.minefield.update()
 
     def is_game_over(self):
-    	""" metoda sprawdzająca czy gra została zakonczona (wygrana lub przegrana gracza)"""
+        """ metoda sprawdzająca czy gra została zakonczona (wygrana lub przegrana gracza)"""
         # jesli miny jeszcze nie sa ustawione
         if not self.minefield.are_mines_set:
             return False
@@ -122,7 +121,7 @@ class Game:
         return False
 
     def end_game(self, clicked_block):
-    	""" metoda koncząca grę (pokazanie wszystkich min, pokazanie napisu wygranej/przegranej, zatrzymanie zegara)"""
+        """ metoda koncząca grę (pokazanie wszystkich min, pokazanie napisu wygranej/przegranej, zatrzymanie zegara)"""
         # wygrana
         if self.check_win():
             self.text = pygame.image.load(os.path.join(globals.ikonki_directory, 'won.png'))
@@ -142,7 +141,7 @@ class Game:
         self.clock.stop_clock()
 
     def new_game(self):
-    	""" Metoda rozpoczynająca nową grę. """
+        """ Metoda rozpoczynająca nową grę. """
         self.minefield.draw()
         if not self.clock:
             self.clock = self.init_clock()
@@ -156,7 +155,7 @@ class Game:
         self.clear_win_lose()
 
     def check_win(self):
-    	""" Metoda sprawdzająca czy gracz wygrał """
+        """ Metoda sprawdzająca czy gracz wygrał """
         # jesli trafimy na mine - przegrana
         if any(b.mined and not b.covered for b in self.minefield.get_blocks()):
             return False
@@ -167,7 +166,7 @@ class Game:
         self.clock.update()
 
     def clear_win_lose(self):
-    	""" metoda usuwająca napis wygranej/przegranej """
+        """ metoda usuwająca napis wygranej/przegranej """
         tmp = pygame.Surface((110, 30))
         tmp.fill(colors.backgroundColor)
         tmp_pos = tmp.get_rect()
@@ -179,8 +178,8 @@ class Game:
         for b in self.minefield.get_blocks():
             b.showMine()
 
-class LeftClickState(object):
 
+class LeftClickState(object):
     def click(self, b):
         if b.covered and not b.flagged and not b.question:
             if b.mines_surrounding == 0:
@@ -188,8 +187,8 @@ class LeftClickState(object):
             else:
                 b.uncover()
 
-class FirstLeftClickState(LeftClickState):
 
+class FirstLeftClickState(LeftClickState):
     def __init__(self, game):
         self.game = game
 
@@ -203,12 +202,13 @@ class FirstLeftClickState(LeftClickState):
 
 
 class AfterFirstLeftClickState(LeftClickState):
-
     def __init__(self, game):
         self.game = game
 
+
 def main():
     pass
+
 
 def help_text():
     help_message = """
@@ -228,8 +228,8 @@ python main.py
 """
     print(help_message)
 
+
 if __name__ == '__main__':
     parser = OptionParser()
     parser.print_help = help_text
     (options, args) = parser.parse_args()
-
