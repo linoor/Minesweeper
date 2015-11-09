@@ -7,7 +7,7 @@
 """ główna klasa obsługująca całą grę"""
 from optparse import OptionParser
 
-from Block import Block
+from block import Block
 from counter import Counter
 import pygame
 import os

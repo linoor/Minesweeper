@@ -9,7 +9,7 @@
 import pygame
 import os
 import colors
-from Block import *
+from block import *
 import random
 import globals
 import itertools

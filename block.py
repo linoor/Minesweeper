@@ -13,7 +13,6 @@ from globals import *
 
 
 class Block(pygame.sprite.Sprite):
-
     def __init__(self, posx, posy, size, i, j):
         """ inicjalizacja stanow pola, ustawianie tła itd."""
         pygame.sprite.Sprite.__init__(self)
@@ -67,7 +66,7 @@ class Block(pygame.sprite.Sprite):
         self.image = pygame.image.load(os.path.join(ikonki_directory, 'aktywne.png'))
 
     def mine(self):
-    	""" metoda ustawiająca bombę na polu """
+        """ metoda ustawiająca bombę na polu """
         self.mined = True
 
     def showMine(self):
@@ -77,6 +76,7 @@ class Block(pygame.sprite.Sprite):
 
 def main():
     pass
+
 
 def help_text():
     help_message = """
@@ -95,6 +95,7 @@ Aby uruchomić grę:
 python main.py
 """
     print(help_message)
+
 
 if __name__ == '__main__':
     parser = OptionParser()
