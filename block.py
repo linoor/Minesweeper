@@ -33,14 +33,13 @@ class Block(pygame.sprite.Sprite):
         self.exploded_state = ExplodedState(self)
         self.not_mined_uncovered_state = NotMinedUncoveredState(self)
         self.state = self.covered_state
-        
+
         self.init_image()
         self.rect = self.image.get_rect()
 
     def init_image(self):
         """ inicjalizacja tła"""
         self.state = self.covered_state.update()
-        # self.image = pygame.image.load(os.path.join(ikonki_directory, 'aktywne.png'))
         self.image = self.image.convert()
 
     def uncover(self, exploded=False):
