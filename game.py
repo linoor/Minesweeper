@@ -18,6 +18,7 @@ import colors
 # DEBUG MODE
 DEBUG = False
 
+
 class Game:
     def __init__(self, minefield):
         self.clock = 0
@@ -64,12 +65,8 @@ class Game:
     def left_click(self, pos):
         """ metoda obsługująca lewe kliknięcie myszki """
         if self.clickable:
-
-            # znajdujemy kliniete pole
             b = self.find_collide_rect(pos)
-
             if b:
-                # jesli pierwsze klikniecie, to rozpoczynamy odliczenie zegara
                 self.left_click_state.click(b)
 
             if self.is_game_over():
