@@ -25,8 +25,6 @@ class Block(pygame.sprite.Sprite):
         self.posx = posx
         self.posy = posy
         self.indexes = i, j
-        self.init_image()
-        self.rect = self.image.get_rect()
 
         self.flagged_state = FlaggedState(self)
         self.question_state = QuestionState(self)
@@ -35,10 +33,14 @@ class Block(pygame.sprite.Sprite):
         self.exploded_state = ExplodedState(self)
         self.not_mined_uncovered_state = NotMinedUncoveredState(self)
         self.state = self.covered_state
+        
+        self.init_image()
+        self.rect = self.image.get_rect()
 
     def init_image(self):
         """ inicjalizacja tła"""
-        self.image = pygame.image.load(os.path.join(ikonki_directory, 'aktywne.png'))
+        self.state = self.covered_state.update()
+        # self.image = pygame.image.load(os.path.join(ikonki_directory, 'aktywne.png'))
         self.image = self.image.convert()
 
     def uncover(self, exploded=False):
@@ -68,7 +70,7 @@ class Block(pygame.sprite.Sprite):
 
     def showMine(self):
         if self.mined:
-            self.image = pygame.image.load(os.path.join(ikonki_directory, 'mina.png'))
+            self.state = self.mined_state.update()
 
 
 class BlockState(object):
