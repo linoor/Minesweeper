@@ -26,7 +26,10 @@ class Game:
         self.minefield = minefield
         self.clickable = True
         self.clock = None
-        self.first_click = True
+
+        self.first_left_click = FirstLeftClickState(self)
+        self.after_first_left_click = AfterFirstLeftClickState(self)
+        self.left_click_state = self.first_left_click
 
         # ustawienia licznika
         self.counter = None
@@ -69,16 +72,7 @@ class Game:
 
             if b:
                  # jesli pierwsze klikniecie, to rozpoczynamy odliczenie zegara
-                if self.first_click:
-                    self.first_click = False
-                    self.minefield.set_mines(b)
-                    self.clock.start_clock()
-
-                if b.covered and not b.flagged and not b.question:
-                    if b.mines_surrounding == 0:
-                        self.minefield.ripple_effect(b)
-                    else:
-                        b.uncover()
+                self.left_click_state.click(b)
 
             if self.is_game_over():
                 self.end_game(b)
@@ -185,6 +179,33 @@ class Game:
         for b in self.minefield.get_blocks():
             b.showMine()
 
+class LeftClickState(object):
+
+    def click(self, b):
+        if b.covered and not b.flagged and not b.question:
+            if b.mines_surrounding == 0:
+                self.game.minefield.ripple_effect(b)
+            else:
+                b.uncover()
+
+class FirstLeftClickState(LeftClickState):
+
+    def __init__(self, game):
+        self.game = game
+
+    def click(self, b):
+        self.game.minefield.set_mines(b)
+        self.game.clock.start_clock()
+        # change state to after left click
+        self.game.left_click_state = self.game.after_first_left_click
+
+        super(FirstLeftClickState, self).click(b)
+
+
+class AfterFirstLeftClickState(LeftClickState):
+
+    def __init__(self, game):
+        self.game = game
 
 def main():
     pass
