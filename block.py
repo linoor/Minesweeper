@@ -51,18 +51,6 @@ class Block(pygame.sprite.Sprite):
         else:
             self.state = self.not_mined_uncovered_state.update()
 
-    def flag(self):
-        """ metoda ustawiająca flagę jako tło """
-        self.state = self.flagged_state.update()
-
-    def question(self):
-        """ metoda ustawiająca pytajnik jako tło """
-        self.state = self.question_state.update()
-
-    def cover(self):
-        """ metoda zasłaniająca pole"""
-        self.state = self.covered_state.update()
-
     def mine(self):
         """ metoda ustawiająca bombę na polu """
         self.mined = True
@@ -71,12 +59,14 @@ class Block(pygame.sprite.Sprite):
         if self.mined:
             self.state = self.mined_state.update()
 
+    def right_click(self, counter):
+        self.state.right_click(counter)
+
 
 class BlockState(object):
     def update(self):
         self.block.image = pygame.image.load(os.path.join(ikonki_directory, self.ikonka))
         return self
-
 
 class FlaggedState(BlockState):
     def __init__(self, block):
@@ -84,11 +74,14 @@ class FlaggedState(BlockState):
         self.ikonka = 'flag.png'
 
     def update(self):
-        print("updating!")
         super(FlaggedState, self).update()
         self.block.flagged = True
         return self
 
+    def right_click(self, counter):
+        self.block.state = self.block.question_state.update()
+        counter.mines += 1
+        counter.update()
 
 class CoveredState(BlockState):
     def __init__(self, block):
@@ -101,6 +94,10 @@ class CoveredState(BlockState):
         self.block.question = False
         return self
 
+    def right_click(self, counter):
+        self.block.state = self.block.flagged_state.update()
+        counter.mines -= 1
+        counter.update()
 
 class QuestionState(BlockState):
     def __init__(self, block):
@@ -113,6 +110,9 @@ class QuestionState(BlockState):
         self.block.question = True
         return self
 
+    def right_click(self, counter):
+        self.block.state = self.block.covered_state.update()
+
 
 class MinedState(BlockState):
     def __init__(self, block):
@@ -124,6 +124,9 @@ class MinedState(BlockState):
         self.block.covered = False
         return self
 
+    def right_click(self):
+        pass
+
 
 class ExplodedState(BlockState):
     def __init__(self, block):
@@ -134,6 +137,9 @@ class ExplodedState(BlockState):
         super(ExplodedState, self).update()
         self.block.covered = False
         return self
+
+    def right_click(self):
+        pass
 
 
 class NotMinedUncoveredState(BlockState):
@@ -148,6 +154,9 @@ class NotMinedUncoveredState(BlockState):
         super(NotMinedUncoveredState, self).update()
         self.block.covered = False
         return self
+
+    def right_click(self):
+        pass
 
 def main():
     pass

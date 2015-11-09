@@ -18,7 +18,6 @@ import colors
 # DEBUG MODE
 DEBUG = False
 
-
 class Game:
     def __init__(self, minefield):
         self.clock = 0
@@ -82,21 +81,7 @@ class Game:
         if self.clickable:
             b = self.find_collide_rect(pos)
             if b:
-                if b.covered:
-                    if not b.flagged and not b.question and self.counter.mines > 0:
-                        b.flag()
-                        # update counter
-                        self.counter.mines -= 1
-                        self.counter.update()
-                    elif b.flagged:
-                        Block.question(b)
-                        # update counter
-                        self.counter.mines += 1
-                        self.counter.update()
-                    elif b.question:
-                        b.cover()
-                        # print(b.rect)
-                        # print(pos)
+                b.right_click(self.counter)
 
             if self.is_game_over():
                 self.end_game(b)
