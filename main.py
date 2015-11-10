@@ -15,7 +15,9 @@ from difficulty import *
 
 def start_new_game(difficulty):
     """ funkcja rozpoczynająca nową grę """
-    game = Game(Minefield(difficulty))
+    game = Game()
+    game.__init__()
+    game.set_minefield(Minefield(difficulty))
     game.new_game()
     return game
 

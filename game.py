@@ -19,12 +19,23 @@ import colors
 DEBUG = False
 
 
+class Singleton(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
 class Game:
-    def __init__(self, minefield):
+    __metaclass__ = Singleton
+
+    def __init__(self):
         self.clock = 0
-        self.minefield = minefield
         self.clickable = True
         self.clock = None
+        self.minefield = None
 
         self.first_left_click = FirstLeftClickState(self)
         self.after_first_left_click = AfterFirstLeftClickState(self)
@@ -35,6 +46,12 @@ class Game:
 
         # napis wygranej/przegranej
         self.text = None
+
+    def set_minefield(self, minefeld):
+        self.minefield = minefeld
+
+    def reset_game(self):
+        self.__init__(self.minefield)
 
     def init_counter(self):
         """ inicjalizacja licznika"""
