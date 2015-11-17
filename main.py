@@ -7,6 +7,7 @@
 
 import sys
 from pygame.locals import *
+from command import StartNewGame
 
 from minefield import *
 from game import *
@@ -18,7 +19,7 @@ def start_new_game(difficulty):
     game = Game()
     game.__init__()
     game.set_minefield(Minefield(difficulty))
-    game.new_game()
+    GameStateChanger.execute(StartNewGame())
     return game
 
 

@@ -8,6 +8,7 @@
 from optparse import OptionParser
 
 from block import Block
+from command import GameStateChanger, EndGameBoiler
 from counter import Counter
 import pygame
 import os
@@ -129,6 +130,9 @@ class Game:
             self.text = pygame.image.load(os.path.join(globals.ikonki_directory, 'lose.png'))
         # odkrywanie wszystkich min
         self.minefield.uncover_mines(clicked_block)
+        GameStateChanger.execute(EndGameBoiler())
+
+    def end_game_boiler(self):
         # umiejscowienie napisu
         textpos = self.text.get_rect()
         textpos.centerx = self.minefield.game_area_pos.centerx
