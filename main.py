@@ -19,7 +19,7 @@ def start_new_game(difficulty):
     game = Game()
     game.__init__()
     game.set_minefield(Minefield(difficulty))
-    GameStateChanger.execute(StartNewGame())
+    GameStateChanger.execute(StartNewGame(game))
     return game
 
 

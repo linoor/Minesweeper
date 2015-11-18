@@ -130,7 +130,7 @@ class Game:
             self.text = pygame.image.load(os.path.join(globals.ikonki_directory, 'lose.png'))
         # odkrywanie wszystkich min
         self.minefield.uncover_mines(clicked_block)
-        GameStateChanger.execute(EndGameBoiler())
+        GameStateChanger.execute(EndGameBoiler(self))
 
     def end_game_boiler(self):
         # umiejscowienie napisu
