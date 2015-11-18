@@ -8,6 +8,8 @@
 from optparse import OptionParser
 
 from block import Block
+from chain_of_responsibility import EndGameChecker, MinefieldSetChecker, MineHitChecker, AllFieldsFlaggedChecker, \
+    AllMinesUncovered, DefaultChecker
 from command import GameStateChanger, EndGameBoiler
 from counter import Counter
 import pygame
@@ -47,6 +49,12 @@ class Game:
 
         # napis wygranej/przegranej
         self.text = None
+
+        self.game_over_checker = MinefieldSetChecker(
+            MineHitChecker(
+                AllFieldsFlaggedChecker(
+                    AllMinesUncovered(
+                        DefaultChecker()))))
 
     def set_minefield(self, minefeld):
         self.minefield = minefeld
@@ -104,21 +112,7 @@ class Game:
 
     def is_game_over(self):
         """ metoda sprawdzająca czy gra została zakonczona (wygrana lub przegrana gracza)"""
-        # jesli miny jeszcze nie sa ustawione
-        if not self.minefield.are_mines_set:
-            return False
-        # jesli trafimy na mine
-        if any(not b.covered and b.mined for b in self.minefield.get_blocks()):
-            return True
-        # jesli oflagujemy wszystkie miny
-        # wszystkie pola ktore sa zaminowane musza byc oflagowane
-        if all(b.flagged for b in self.minefield.get_blocks() if b.mined):
-            return True
-        # jesli odkryjemy wszystkie niezaminowane pola
-        if all(not b.covered for b in self.minefield.get_blocks() if not b.mined):
-            return True
-
-        return False
+        return self.game_over_checker.check(self)
 
     def end_game(self, clicked_block):
         """ metoda koncząca grę (pokazanie wszystkich min, pokazanie napisu wygranej/przegranej, zatrzymanie zegara)"""
